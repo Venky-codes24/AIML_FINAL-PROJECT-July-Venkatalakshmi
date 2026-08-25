@@ -1,158 +1,200 @@
-# SmartHire — Resume-to-Job Matching & Career Guidance Engine
+# SmartHire — AI-Powered Resume & Career Matching Engine
 
-Classical-ML project (no LLMs). Upload a resume → get matching jobs, a predicted
-role category, and a skill-gap report.
+SmartHire is a classical machine learning application and AI/ML prototype (no external LLMs or black-box APIs) for resume parsing, supervised role categorization, cosine-similarity job matching, skill-gap analysis, and career learning path recommendations.
 
-## Core scope
-1. Resume category classifier — supervised (TF-IDF → Logistic Regression)
-2. Job recommender — unsupervised (TF-IDF + cosine similarity, top-N)
-3. Skill-gap report — job skills minus resume skills
+---
 
-Optional: fit predictor, clustering + topics, salary regression.
+## 🌟 Key Features
 
-## Requirements
-- **Python 3.10+** (developed on 3.12)
-- **git** (to clone)
-- A free **Kaggle account** (to download the datasets)
+1. **Multi-Format Resume Parser**: Supports text extraction from **PDF**, **DOCX**, and **TXT** files with automatic normalization and verifiable metadata extraction (education, experience, contact details).
+2. **Supervised Resume Category Classifier**: Predicts candidate role category across 25 target specializations using **TF-IDF + Logistic Regression** with confidence scoring and probability distributions.
+3. **Unsupervised Job Recommender**: Ranks and matches the candidate's resume against **136,000+ job listings** using memory-efficient **Sparse TF-IDF + Cosine Similarity** with active duplicate suppression.
+4. **Transparent Match Scoring**: Evaluates candidate-to-job similarity scored as `Match Score: X/100` (clearly distinguished from hiring probabilities).
+5. **Automated Skill Extraction**: Identifies technical and professional skills using canonical normalization and alias matching (e.g. `scikit-learn`, `sklearn`, `React.js`, `C++`, `Docker`, `AWS`).
+6. **Skill-Gap Analysis**: Performs exact matching against required job skills, categorizing them into **Matched Skills** and **Missing Skills**.
+7. **Prioritized Career Learning Path**: Identifies and ranks missing skills by demand frequency across recommended job matches.
+8. **Explainable Multi-Factor Alignment**: Combines semantic text similarity, skill overlap, and role relevance into a transparent breakdown without synthetic labels.
+9. **Interactive Streamlit Web Portal**: Clean, responsive UI with distinct tabs for uploading resumes or trying demo sample documents.
 
-## Getting started
+---
 
-### 1. Clone the repo
+## ⚠️ Match Score Disclaimer
+
+> **Important:** The **Match Score** displayed by the recommender represents text and skill similarity/relevance between the uploaded resume and job postings. It is **not** a prediction of hiring probability, selection odds, or an assessment of candidate suitability beyond textual alignment.
+
+---
+
+## 🏗️ Architecture
+
 ```
-git clone <REPO_URL> SmartHire
-cd SmartHire
+User Resume (PDF / DOCX / TXT)
+             │
+             ▼
+[ Resume Parser & Cleaner ] ──────────────► [ Extract Metadata & Skills ]
+             │
+             ├───► [ TF-IDF Vectorizer ] ───► [ Logistic Regression Classifier ]
+             │                                          │
+             │                                          ▼
+             │                                   Predicted Role & Confidence
+             │
+             └───► [ Sparse Job TF-IDF Matrix ] ───► [ Cosine Similarity Engine ]
+                                                           │
+                                                           ▼
+                                                Deduplicated Top-N Matches
+                                                           │
+                                                           ├───► [ Skill Gap Analysis ]
+                                                           │      (Matched vs Missing)
+                                                           │
+                                                           └───► [ Recommended Skills ]
+                                                                  (High-Demand Learning Path)
 ```
-> Replace `<REPO_URL>` with the repository's clone URL (e.g.
-> `https://github.com/<user>/SmartHire.git`). If you already have the folder
-> locally, just `cd` into it.
 
-### 2. Create a virtual environment and install dependencies
+---
+
+## 📂 Project Structure
+
 ```
+Smart_hire_AI_ML_June/
+├── app/
+│   └── streamlit_app.py              # Streamlit web portal
+├── data/
+│   ├── raw/                          # Original raw downloads (git-ignored)
+│   ├── interim/                      # Merged job corpus (job_corpus.csv)
+│   └── processed/                    # Final model-ready datasets
+│       ├── jobs_clean.csv            # 136,759 cleaned job postings
+│       └── resumes_clean.csv         # 962 cleaned resumes (25 categories)
+├── models/                           # Saved model artifacts (git-ignored)
+│   ├── resume_classifier.pkl         # Trained Logistic Regression classifier
+│   ├── resume_vectorizer.pkl         # Fitted TF-IDF resume vectorizer
+│   ├── job_vectorizer.pkl            # Fitted TF-IDF job vectorizer
+│   ├── job_matrix.pkl                # Precalculated sparse CSR job matrix
+│   ├── job_metadata.pkl              # Fast-lookup job metadata table
+│   └── skills_vocab.json             # Canonical skills mapping dictionary
+├── notebooks/
+│   ├── 01_eda.ipynb                  # Exploratory data analysis
+│   ├── 02_resume_classifier.ipynb    # Supervised classification experiments
+│   ├── 03_recommender.ipynb          # Recommender experiments
+│   ├── 04_clustering_topics.ipynb    # KMeans clustering and topic discovery
+│   └── 05_fit_predictor.ipynb        # Explainable candidate fit index
+├── reports/
+│   └── figures/                      # Evaluation figures & confusion matrices
+├── src/
+│   ├── config.py                     # Centralized paths and settings
+│   ├── evaluate.py                   # Classification & recommender metrics
+│   ├── data/
+│   │   ├── load_data.py              # Safe CSV loaders
+│   │   └── preprocess.py             # Preprocessing & deduplication
+│   ├── features/
+│   │   ├── text_features.py          # TF-IDF feature helpers
+│   │   └── match_features.py         # Skill extraction, gaps & recommendations
+│   ├── models/
+│   │   ├── classifier.py             # Classifier training & prediction
+│   │   ├── recommender.py            # Cosine similarity matching & deduplication
+│   │   ├── clustering.py             # KMeans topic clustering
+│   │   ├── fit_predictor.py          # Explainable multi-factor fit scorer
+│   │   └── train.py                  # Unified CLI training script
+│   └── parsing/
+│       └── resume_parser.py          # PDF, DOCX, TXT parser & metadata extractor
+├── tests/
+│   ├── test_features.py              # Tests for preprocessing & TF-IDF
+│   ├── test_parser.py                # Tests for PDF, DOCX, TXT parsing
+│   ├── test_classifier.py            # Tests for category classification
+│   └── test_recommender.py           # Tests for job matching & fit index
+├── download_data.py                  # Automated Kaggle dataset downloader
+├── requirements.txt                  # Pinned Python dependencies
+├── pytest.ini                        # Pytest configuration
+└── README.md                         # Documentation
+```
+
+---
+
+## ⚡ Quickstart Guide
+
+### 1. Prerequisites
+- **Python 3.10+** (tested on Python 3.11 and 3.12)
+- Git
+
+### 2. Environment Setup
+```bash
+# Clone the repository
+git clone https://github.com/Anjali05R/Smart_hire_AI_ML_June.git
+cd Smart_hire_AI_ML_June
+
+# Create and activate virtual environment
 python -m venv .venv
 
 # Windows (PowerShell)
 .venv\Scripts\Activate.ps1
 # Windows (cmd)
 .venv\Scripts\activate.bat
-# macOS / Linux
+# Linux / macOS
 source .venv/bin/activate
 
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 3. Download the datasets
-The datasets are **not** committed (see `.gitignore`) — download them into
-`data/raw/` once:
-```
+### 3. Download Datasets
+```bash
 python download_data.py
 ```
-The first run asks for your Kaggle credentials (username + API key from
-Kaggle → Settings → **API** → **Create New Token**). This fetches the Resume
-and Naukri datasets; LinkedIn is optional.
 
-Filenames are already wired up in `src/config.py`, so you only edit that file if
-your downloaded filenames differ. **Full download details + manual alternatives:**
-see [`data/DATASETS.md`](data/DATASETS.md).
-
-### 4. Build the cleaned data / job corpus
-Merge and clean the raw files into model-ready CSVs (`data/processed/`):
-```
+### 4. Preprocess Data
+```bash
 python -m src.data.preprocess
 ```
-This writes `data/interim/job_corpus.csv`, `data/processed/jobs_clean.csv`, and
-`data/processed/resumes_clean.csv`. Run all commands from the project root so the
-`src` package imports resolve.
 
-### 5. Explore & train (notebooks in VS Code)
-The notebooks run in **VS Code** (install the **Python** and **Jupyter**
-extensions if prompted) — no standalone Jupyter server needed:
-
-1. Open the `SmartHire` folder in VS Code.
-2. Open a notebook, e.g. `notebooks/01_eda.ipynb`.
-3. Top-right, click **Select Kernel → Python Environments** and choose the venv
-   at `.venv\Scripts\python.exe` (shown as `.venv (Python 3.12)`).
-4. Run cells with **Shift+Enter**.
-
-Run the notebooks in order **01 → 05**. Each notebook is one module of the
-project; move reusable code from a notebook into the matching `src/` file, and
-save trained models to `models/` (as `.pkl` via joblib) so the app can load them
-without retraining.
-
-> Prefer the classic browser UI instead? Add `jupyter` to `requirements.txt`
-> (or `pip install jupyter`) and run `jupyter notebook`. The pinned dependency
-> is `ipykernel`, which is all VS Code needs.
-
-### 6. Launch the web app
+### 5. Train Models & Build Sparse Indices
+Train the resume classifier and build the sparse recommender index (run once):
+```bash
+python -m src.models.train
 ```
+
+### 6. Launch the Web Application
+```bash
 streamlit run app/streamlit_app.py
 ```
-Opens the SmartHire portal in your browser (default <http://localhost:8501>).
+Open your browser at **`http://localhost:8501`**.
 
-> **Current status:** the data pipeline (steps 3–4) is fully working. The model
-> code in `src/models/` (`classifier.py`, `recommender.py`) and the Streamlit UI
-> in `app/streamlit_app.py` are still stubs — build them via the notebooks first
-> (step 5). Until then the app page will be empty.
+---
 
-## Project structure
-```
-smarthire/
-├── README.md                         # what the project is, setup, how to run
-├── requirements.txt                  # Python dependencies to install
-├── .gitignore                        # keeps datasets, models, caches out of git
-│
-├── data/                             # all data lives here (git-ignored)
-│   ├── raw/                          # original Kaggle downloads — NEVER edit these
-│   ├── interim/                      # merged / partially cleaned data
-│   └── processed/                    # final, model-ready data
-│
-├── notebooks/                        # exploration & experiments — run in order
-│   ├── 01_eda.ipynb                  # explore resumes + jobs (shape, categories, nulls)
-│   ├── 02_resume_classifier.ipynb    # SUPERVISED: predict resume category
-│   ├── 03_recommender.ipynb          # UNSUPERVISED: cosine-similarity job ranking
-│   ├── 04_clustering_topics.ipynb    # UNSUPERVISED: clusters + skill-gap report
-│   └── 05_fit_predictor.ipynb        # SUPERVISED (optional): shortlisting model
-│
-├── src/                              # reusable code — imported by notebooks + app
-│   ├── config.py                     # paths, dataset filenames, constants
-│   ├── data/
-│   │   ├── load_data.py              # read the raw CSVs
-│   │   └── preprocess.py             # clean text, merge the job corpus
-│   ├── features/
-│   │   ├── text_features.py          # TF-IDF vectorizers
-│   │   └── match_features.py         # skill overlap, experience/education match
-│   ├── models/
-│   │   ├── classifier.py             # train/predict resume category
-│   │   ├── recommender.py            # cosine-similarity job ranking (top-N)
-│   │   ├── clustering.py             # KMeans + optional topic modeling
-│   │   └── fit_predictor.py          # shortlisting model (optional)
-│   ├── parsing/
-│   │   └── resume_parser.py          # extract text from PDF / DOCX / TXT
-│   └── evaluate.py                   # shared metrics for all models
-│
-├── models/                           # saved .pkl model files (git-ignored)
-│
-├── app/
-│   └── streamlit_app.py              # the web portal UI (build this last)
-│
-├── reports/
-│   └── figures/                      # confusion matrix, PCA/t-SNE, silhouette plots
-│
-└── tests/
-    └── test_features.py              # basic unit tests (optional)
+## 🧪 Running Unit Tests
+
+Run the complete test suite with pytest:
+```bash
+python -m pytest -v
 ```
 
-### What each part is for
-- **`data/`** — Keep raw downloads in `raw/` untouched; write cleaned versions to
-  `interim/` then `processed/`. The whole folder is git-ignored so datasets never
-  get committed.
-- **`notebooks/`** — Where you experiment and see results. Run 01 → 05 in order;
-  each notebook is one module of the project.
-- **`src/`** — Once code works in a notebook, move the reusable function here so the
-  notebooks and the app can both import it. `config.py` holds every path so nothing
-  is hard-coded.
-- **`models/`** — Trained models saved as `.pkl` (via joblib) so the app can load
-  them without retraining.
-- **`app/`** — The Streamlit portal. It only wires together pieces that already work
-  in `src/`, so build it last.
-- **`reports/`** — Figures for the write-up and the final report.
-- **`tests/`** — Optional sanity checks for feature functions.
+All 16 test cases validate:
+- Text normalization and token sanitization
+- PDF, DOCX, and TXT parsing with corrupted/empty file handling
+- Skill extraction and alias canonicalization
+- Skill-gap computation and frequency ranking
+- TF-IDF vectorization and sparse matrix transformation
+- Resume classifier training and probability prediction
+- Job recommendation ranking and category filtering
+- Explainable multi-factor fit scoring calculation
+
+---
+
+## 📊 Model Evaluation Results
+
+- **Resume Classifier Architecture**: TF-IDF (5,000 features, unigrams + bigrams) + Logistic Regression (L2 regularization, balanced weights)
+- **Classifier Performance**:
+  - Test Accuracy: **99.48%**
+  - Macro F1-Score: **0.9945**
+  - Weighted F1-Score: **0.9949**
+- **Recommender Architecture**: Memory-efficient Sparse TF-IDF (10,000 unigrams) + Cosine Similarity over 136,759 postings with near-duplicate suppression.
+
+---
+
+## 🔒 Methodology & Project Scope
+
+- **Scope Definition**: SmartHire is a **production-quality local application / AI/ML prototype** designed for transparent, explainable career matching and skill discovery.
+- **Ethical Standards**: Public resume and job post datasets do not contain ground-truth hiring outcomes. The system avoids training ungrounded binary hire/reject models and instead provides transparent textual relevance metrics and skill coverage indicators.
+- **Privacy**: File parsing and scoring execute strictly in local memory without remote telemetry or cloud transmission.
+
+---
+
+## 📄 License
+Open source project for educational and career-matching purposes.

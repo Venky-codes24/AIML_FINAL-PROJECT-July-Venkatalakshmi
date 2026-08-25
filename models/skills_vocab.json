@@ -1,0 +1,913 @@
+{
+  "HTML": [
+    "html 5",
+    "xhtml",
+    "html5",
+    "dhtml",
+    "html"
+  ],
+  "CSS": [
+    "css 3",
+    "css3",
+    "scss",
+    "less",
+    "sass",
+    "css"
+  ],
+  "JavaScript": [
+    "java script",
+    "ecmascript",
+    "javascript",
+    "vanilla js",
+    "es2020",
+    "es2015",
+    "es6",
+    "es7",
+    "es8",
+    "js"
+  ],
+  "TypeScript": [
+    "typescript",
+    "ts"
+  ],
+  "Angular": [
+    "angular 16",
+    "angular 2+",
+    "angular 10",
+    "angular.js",
+    "angular 17",
+    "angular 15",
+    "angular 14",
+    "angular 4",
+    "angular 8",
+    "angular 2",
+    "angularjs",
+    "angular"
+  ],
+  "React": [
+    "react-native",
+    "react native",
+    "react.js",
+    "reactjs",
+    "react"
+  ],
+  "Vue.js": [
+    "nuxt.js",
+    "vue.js",
+    "vuejs",
+    "vue 3",
+    "vuex",
+    "nuxt",
+    "vue"
+  ],
+  "Next.js": [
+    "next.js",
+    "nextjs"
+  ],
+  "Tailwind CSS": [
+    "tailwind css",
+    "tailwindcss",
+    "tailwind"
+  ],
+  "Bootstrap": [
+    "bootstrap 5",
+    "bootstrap 4",
+    "bootstrap"
+  ],
+  "jQuery": [
+    "jquery"
+  ],
+  "Python": [
+    "cpython",
+    "python3",
+    "python2",
+    "python",
+    "py3"
+  ],
+  "Java": [
+    "advanced java",
+    "core java",
+    "java 11",
+    "java 17",
+    "java ee",
+    "java se",
+    "java 21",
+    "java 8",
+    "j2se",
+    "java",
+    "j2ee"
+  ],
+  "C++": [
+    "c plus plus",
+    "cpp",
+    "c++"
+  ],
+  "C#": [
+    "c sharp",
+    "c-sharp",
+    "c#.net",
+    "csharp",
+    "c#"
+  ],
+  "C": [
+    "c programming",
+    "c language",
+    "embedded c",
+    "ansi c",
+    "c/c++",
+    "c"
+  ],
+  "R": [
+    "r programming",
+    "r language",
+    "r-project",
+    "r package",
+    "r studio",
+    "r shiny",
+    "rstudio",
+    "cran",
+    "r"
+  ],
+  "Go": [
+    "go programming",
+    "go developer",
+    "go language",
+    "golang",
+    "go"
+  ],
+  "Rust": [
+    "rustlang",
+    "rust"
+  ],
+  "Ruby": [
+    "ruby on rails",
+    "rails",
+    "ruby"
+  ],
+  "PHP": [
+    "codeigniter",
+    "laravel",
+    "symfony",
+    "php"
+  ],
+  "Kotlin": [
+    "kotlin"
+  ],
+  "Swift": [
+    "swiftui",
+    "swift"
+  ],
+  "Scala": [
+    "scala"
+  ],
+  "Bash/Shell": [
+    "shell scripting",
+    "shell script",
+    "powershell",
+    "bash/shell",
+    "bash",
+    "zsh"
+  ],
+  "Spring Boot": [
+    "spring framework",
+    "spring security",
+    "spring cloud",
+    "spring data",
+    "spring boot",
+    "spring-boot",
+    "springboot",
+    "spring mvc"
+  ],
+  ".NET": [
+    ".net framework",
+    "asp.net core",
+    ".net core",
+    "asp.net",
+    "dotnet",
+    "vb.net",
+    ".net"
+  ],
+  "Node.js": [
+    "node js",
+    "node.js",
+    "nodejs",
+    "node"
+  ],
+  "Express.js": [
+    "express.js",
+    "expressjs",
+    "express"
+  ],
+  "Django": [
+    "django rest framework",
+    "django",
+    "drf"
+  ],
+  "Flask": [
+    "flask"
+  ],
+  "FastAPI": [
+    "fast api",
+    "fastapi"
+  ],
+  "REST APIs": [
+    "rest services",
+    "restful apis",
+    "restful api",
+    "api design",
+    "rest apis",
+    "web apis",
+    "rest api",
+    "rest"
+  ],
+  "GraphQL": [
+    "graphql"
+  ],
+  "Microservices": [
+    "service oriented architecture",
+    "microservice architecture",
+    "distributed systems",
+    "microservices"
+  ],
+  "Hibernate": [
+    "hibernate orm",
+    "hibernate",
+    "jpa"
+  ],
+  "Selenium": [
+    "selenium webdriver",
+    "selenium grid",
+    "selenium ide",
+    "webdriver",
+    "selenium"
+  ],
+  "Cucumber": [
+    "cucumber testing",
+    "cucumber-jvm",
+    "cucumber bdd",
+    "cucumber",
+    "gherkin",
+    "bdd"
+  ],
+  "TestNG": [
+    "testng framework",
+    "test ng",
+    "test-ng",
+    "testng"
+  ],
+  "JUnit": [
+    "junit 4",
+    "junit 5",
+    "junit"
+  ],
+  "PyTest": [
+    "unittest",
+    "py.test",
+    "pytest"
+  ],
+  "Cypress": [
+    "cypress.io",
+    "cypress"
+  ],
+  "Playwright": [
+    "playwright"
+  ],
+  "Appium": [
+    "appium mobile testing",
+    "appium"
+  ],
+  "Postman": [
+    "postman api",
+    "postman",
+    "newman"
+  ],
+  "JMeter": [
+    "apache jmeter",
+    "load testing",
+    "jmeter"
+  ],
+  "Software Testing": [
+    "functional testing",
+    "regression testing",
+    "black box testing",
+    "white box testing",
+    "quality assurance",
+    "software testing",
+    "defect tracking",
+    "sanity testing",
+    "manual testing",
+    "system testing",
+    "test execution",
+    "test planning",
+    "test strategy",
+    "bug tracking",
+    "test cases",
+    "sdlc",
+    "stlc",
+    "uat",
+    "qa"
+  ],
+  "Automation Testing": [
+    "keyword driven framework",
+    "data driven framework",
+    "automation framework",
+    "automation testing",
+    "page object model",
+    "automated testing",
+    "hybrid framework",
+    "test automation",
+    "sdet",
+    "pom"
+  ],
+  "MySQL": [
+    "mysql database",
+    "my sql",
+    "mysql"
+  ],
+  "PostgreSQL": [
+    "postgre sql",
+    "postgresql",
+    "postgres",
+    "psql"
+  ],
+  "SQL": [
+    "transact-sql",
+    "oracle sql",
+    "sqlite",
+    "pl/sql",
+    "plsql",
+    "t-sql",
+    "sql"
+  ],
+  "MongoDB": [
+    "documentdb",
+    "mongodb",
+    "mongo",
+    "nosql"
+  ],
+  "Redis": [
+    "redis cache",
+    "redis"
+  ],
+  "Elasticsearch": [
+    "elastic search",
+    "elasticsearch",
+    "opensearch"
+  ],
+  "Snowflake": [
+    "snowflake data warehouse",
+    "snowflake"
+  ],
+  "DynamoDB": [
+    "aws dynamodb",
+    "dynamodb"
+  ],
+  "Oracle DB": [
+    "oracle database",
+    "oracle rdbms",
+    "oracle 19c",
+    "oracle 12c",
+    "oracle 11g",
+    "oracle db"
+  ],
+  "Machine Learning": [
+    "unsupervised learning",
+    "statistical learning",
+    "supervised learning",
+    "machine learning",
+    "ml"
+  ],
+  "Deep Learning": [
+    "artificial neural networks",
+    "neural networks",
+    "deep learning",
+    "lstm",
+    "cnn",
+    "rnn",
+    "ann"
+  ],
+  "Natural Language Processing": [
+    "natural language processing",
+    "large language models",
+    "hugging face",
+    "transformers",
+    "text mining",
+    "huggingface",
+    "spacy",
+    "bert",
+    "nltk",
+    "llm",
+    "ner",
+    "nlp"
+  ],
+  "Computer Vision": [
+    "object detection",
+    "image processing",
+    "computer vision",
+    "opencv",
+    "yolo"
+  ],
+  "TensorFlow": [
+    "tensorflow",
+    "tf"
+  ],
+  "PyTorch": [
+    "pytorch",
+    "torch"
+  ],
+  "Keras": [
+    "keras"
+  ],
+  "Scikit-learn": [
+    "scikit learn",
+    "scikit-learn",
+    "sklearn"
+  ],
+  "Pandas": [
+    "pandas"
+  ],
+  "NumPy": [
+    "numpy"
+  ],
+  "SciPy": [
+    "scipy"
+  ],
+  "XGBoost": [
+    "lightgbm",
+    "catboost",
+    "xgboost"
+  ],
+  "Statistics": [
+    "statistical modeling",
+    "regression analysis",
+    "hypothesis testing",
+    "time series",
+    "statistics"
+  ],
+  "Data Analysis": [
+    "exploratory data analysis",
+    "data analytics",
+    "data analysis",
+    "eda"
+  ],
+  "Data Visualization": [
+    "data visualization",
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "d3.js"
+  ],
+  "Tableau": [
+    "tableau"
+  ],
+  "Power BI": [
+    "power bi",
+    "powerbi"
+  ],
+  "Apache Spark": [
+    "apache spark",
+    "pyspark",
+    "spark"
+  ],
+  "Hadoop": [
+    "mapreduce",
+    "hadoop",
+    "hdfs",
+    "hive"
+  ],
+  "Databricks": [
+    "databricks"
+  ],
+  "MLOps": [
+    "model deployment",
+    "kubeflow",
+    "mlflow",
+    "mlops"
+  ],
+  "AWS": [
+    "amazon web services",
+    "cloudformation",
+    "cloudwatch",
+    "lambda",
+    "ec2",
+    "rds",
+    "sns",
+    "iam",
+    "sqs",
+    "aws",
+    "s3"
+  ],
+  "Azure": [
+    "microsoft azure",
+    "azure functions",
+    "blob storage",
+    "azure devops",
+    "azure"
+  ],
+  "GCP": [
+    "google cloud platform",
+    "google cloud",
+    "bigquery",
+    "gcp"
+  ],
+  "Docker": [
+    "containerization",
+    "docker-compose",
+    "containers",
+    "docker"
+  ],
+  "Kubernetes": [
+    "kubernetes",
+    "helm",
+    "k8s"
+  ],
+  "CI/CD": [
+    "continuous integration",
+    "continuous deployment",
+    "ci/cd",
+    "ci cd",
+    "cicd"
+  ],
+  "Jenkins": [
+    "jenkins"
+  ],
+  "Git": [
+    "version control",
+    "bitbucket",
+    "gitlab",
+    "github",
+    "git"
+  ],
+  "Terraform": [
+    "infrastructure as code",
+    "terraform",
+    "iac"
+  ],
+  "Ansible": [
+    "ansible"
+  ],
+  "Linux": [
+    "debian",
+    "ubuntu",
+    "centos",
+    "redhat",
+    "linux",
+    "unix"
+  ],
+  "Nginx": [
+    "apache web server",
+    "nginx"
+  ],
+  "Agile/Scrum": [
+    "sprint planning",
+    "scrum master",
+    "agile/scrum",
+    "kanban",
+    "scrum",
+    "agile"
+  ],
+  "Jira": [
+    "confluence",
+    "trello",
+    "jira"
+  ],
+  "Project Management": [
+    "stakeholder management",
+    "project management",
+    "risk management",
+    "pmp"
+  ],
+  "UI/UX Design": [
+    "user experience",
+    "user interface",
+    "ui/ux design",
+    "prototyping",
+    "wireframing",
+    "ui design",
+    "ux design",
+    "adobe xd",
+    "ui/ux",
+    "figma"
+  ],
+  "Recruitment & HR": [
+    "employee relations",
+    "talent acquisition",
+    "recruitment & hr",
+    "hr operations",
+    "recruitment",
+    "hr policies",
+    "onboarding",
+    "screening",
+    "sourcing",
+    "payroll"
+  ],
+  "Digital Marketing": [
+    "social media marketing",
+    "content marketing",
+    "digital marketing",
+    "email marketing",
+    "google ads",
+    "seo",
+    "sem"
+  ],
+  "Financial Analysis": [
+    "financial analysis",
+    "financial modeling",
+    "accounting",
+    "budgeting",
+    "auditing",
+    "taxation",
+    "tally"
+  ],
+  "Engineering Design": [
+    "engineering design"
+  ],
+  "Site Engineering": [
+    "site engineering"
+  ],
+  "Design": [
+    "design"
+  ],
+  "Fashion Designing": [
+    "fashion designing"
+  ],
+  "Sql Developer": [
+    "sql developer"
+  ],
+  "Security": [
+    "security"
+  ],
+  "Ux Developer To Work On Html": [
+    "ux developer to work on html"
+  ],
+  "Security Patching": [
+    "security patching"
+  ],
+  "Database": [
+    "database"
+  ],
+  "Sprring Frameworks": [
+    "sprring frameworks"
+  ],
+  "Itil Etc. Engineering Graduate": [
+    "itil etc. engineering graduate"
+  ],
+  "Preliminary Design": [
+    "preliminary design"
+  ],
+  "Detailed Design": [
+    "detailed design"
+  ],
+  "Design Patterns": [
+    "design patterns"
+  ],
+  "Other Engineering": [
+    "other engineering"
+  ],
+  "Entity Framework": [
+    "entity framework"
+  ],
+  "Databases": [
+    "databases"
+  ],
+  "Engineering": [
+    "engineering"
+  ],
+  "Spring Framework": [
+    "spring framework"
+  ],
+  "Bigdata Analytics": [
+    "bigdata analytics"
+  ],
+  "Database Performance Tuning": [
+    "database performance tuning"
+  ],
+  "By Designing": [
+    "by designing"
+  ],
+  "Analytics": [
+    "analytics"
+  ],
+  "Database Programming": [
+    "database programming"
+  ],
+  "Designing": [
+    "designing"
+  ],
+  "Re-Engineering": [
+    "re-engineering"
+  ],
+  "Entityframework": [
+    "entityframework"
+  ],
+  "Release Engineering": [
+    "release engineering"
+  ],
+  "Itm6 Framework": [
+    "itm6 framework"
+  ],
+  "Define Test Strategy Design": [
+    "define test strategy design"
+  ],
+  "Menu Design": [
+    "menu design"
+  ],
+  "Internal Database": [
+    "internal database"
+  ],
+  "Embedded Engineering Services": [
+    "embedded engineering services"
+  ],
+  "Senior Developer": [
+    "senior developer"
+  ],
+  "Information Security": [
+    "information security"
+  ],
+  "Bi-Analytics": [
+    "bi-analytics"
+  ],
+  "Designs": [
+    "designs"
+  ],
+  "Database Configuration": [
+    "database configuration"
+  ],
+  "Software Developers": [
+    "software developers"
+  ],
+  "Engineers": [
+    "engineers"
+  ],
+  "Developers": [
+    "developers"
+  ],
+  "Like Developer": [
+    "like developer"
+  ],
+  "Establish Design Standards": [
+    "establish design standards"
+  ],
+  "Process Re-Engineering": [
+    "process re-engineering"
+  ],
+  "Software And Product Security": [
+    "software and product security"
+  ],
+  "Computer Engineering": [
+    "computer engineering"
+  ],
+  "Design Reviews": [
+    "design reviews"
+  ],
+  "Html5 Frameworks - Jquery": [
+    "html5 frameworks - jquery"
+  ],
+  "Database Projects": [
+    "database projects"
+  ],
+  "Control System Design": [
+    "control system design"
+  ],
+  "Python Webframework-Django": [
+    "python webframework-django"
+  ],
+  "Databases Sql": [
+    "databases sql"
+  ],
+  "And Analytics. The Platform": [
+    "and analytics. the platform"
+  ],
+  "Company - Atri Developers": [
+    "company - atri developers"
+  ],
+  "Web Designer": [
+    "web designer"
+  ],
+  "Web Designing And Developer": [
+    "web designing and developer"
+  ],
+  "Web Designer And Developer": [
+    "web designer and developer"
+  ],
+  "Web And Graphics Designer": [
+    "web and graphics designer"
+  ],
+  "Database Connectivity": [
+    "database connectivity"
+  ],
+  "S Duncan Engineering Ltd": [
+    "s duncan engineering ltd"
+  ],
+  "Mechanical Engineering": [
+    "mechanical engineering"
+  ],
+  "Mechanical Design Engineer": [
+    "mechanical design engineer"
+  ],
+  "Qc Civil Engineer": [
+    "qc civil engineer"
+  ],
+  "Qc Civil Engineer.": [
+    "qc civil engineer."
+  ],
+  "Qc - Civil Engineer.": [
+    "qc - civil engineer."
+  ],
+  "Security And Quality Standard.": [
+    "security and quality standard."
+  ],
+  "B.E. Civil Engineering Pune": [
+    "b.e. civil engineering pune"
+  ],
+  "Civil Site Engineer": [
+    "civil site engineer"
+  ],
+  "Civil Engineer": [
+    "civil engineer"
+  ],
+  "Description - Civil Engineer": [
+    "description - civil engineer"
+  ],
+  "Description - Site Engineer": [
+    "description - site engineer"
+  ],
+  "Civil Engineer - Site Encharge": [
+    "civil engineer - site encharge"
+  ],
+  "Java Developer": [
+    "java developer"
+  ],
+  "Java Developer - Tech Mahindra": [
+    "java developer - tech mahindra"
+  ],
+  "Andheri As A Java Developer.": [
+    "andheri as a java developer."
+  ],
+  "Frameworks Ionic": [
+    "frameworks ionic"
+  ],
+  "Ionic 3 Framework": [
+    "ionic 3 framework"
+  ],
+  "Database Mongodb": [
+    "database mongodb"
+  ],
+  "Full Stack Java Developer": [
+    "full stack java developer"
+  ],
+  "Java Web Developer": [
+    "java web developer"
+  ],
+  "Database- Exprience - 6 Months": [
+    "database- exprience - 6 months"
+  ],
+  "Jformdesigner": [
+    "jformdesigner"
+  ],
+  "Qa Engineers": [
+    "qa engineers"
+  ],
+  "Bods Developer": [
+    "bods developer"
+  ],
+  "Role Sap Bo Developer": [
+    "role sap bo developer"
+  ],
+  "Sap Hana Developer": [
+    "sap hana developer"
+  ],
+  "Role-Sap Hana Developer": [
+    "role-sap hana developer"
+  ],
+  "2. Aero Space Design": [
+    "2. aero space design"
+  ],
+  "Role-Sap Bo Developer": [
+    "role-sap bo developer"
+  ],
+  "Abap Developer": [
+    "abap developer"
+  ],
+  "Abap Developer - Sap Exposure": [
+    "abap developer - sap exposure"
+  ],
+  "Role Java Developer": [
+    "role java developer"
+  ],
+  "Role Software Test Engineer": [
+    "role software test engineer"
+  ],
+  "Svn Database Oracle": [
+    "svn database oracle"
+  ],
+  "Electrical Engineering": [
+    "electrical engineering"
+  ],
+  "Electrical Engineer": [
+    "electrical engineer"
+  ],
+  "Engineering Designs": [
+    "engineering designs"
+  ]
+}

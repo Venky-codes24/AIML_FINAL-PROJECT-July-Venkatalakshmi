@@ -30,6 +30,18 @@ JOBS_CLEAN_CSV = PROCESSED_DIR / "jobs_clean.csv"        # model-ready jobs (+ t
 # ---- Common schema every job source is mapped to before merging ----
 COMMON_JOB_COLUMNS = ["title", "company", "location", "skills", "description", "experience"]
 
-# ---- Constants ----
-RANDOM_STATE = 42   # seed for reproducible train/test splits
-TOP_N = 5           # jobs returned by the recommender
+# ---- Model Artifact Paths ----
+RESUME_CLASSIFIER_PATH = MODELS_DIR / "resume_classifier.pkl"
+RESUME_VECTORIZER_PATH = MODELS_DIR / "resume_vectorizer.pkl"
+JOB_VECTORIZER_PATH = MODELS_DIR / "job_vectorizer.pkl"
+JOB_MATRIX_PATH = MODELS_DIR / "job_matrix.pkl"
+JOB_METADATA_PATH = MODELS_DIR / "job_metadata.pkl"
+SKILLS_VOCAB_PATH = MODELS_DIR / "skills_vocab.json"
+LABEL_ENCODER_PATH = MODELS_DIR / "label_encoder.pkl"
+
+# ---- Constants & Hyperparameters ----
+RANDOM_STATE = 42          # seed for reproducible train/test splits
+TOP_N = 5                  # default jobs returned by the recommender
+MAX_FEATURES = 5000        # max features for TF-IDF
+NGRAM_RANGE = (1, 2)       # n-gram range for TF-IDF
+SUPPORTED_EXTENSIONS = [".pdf", ".docx", ".txt"]
