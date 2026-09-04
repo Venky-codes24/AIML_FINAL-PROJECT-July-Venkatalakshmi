@@ -116,13 +116,39 @@ def test_symbol_based_skills():
 
 
 def test_false_positive_prevention():
-    """Ensure single letters like 'r' and 'c' or English words like 'go' are not falsely extracted."""
+    """Ensure single letters like 'r' and 'c', English words like 'go', and sub-tokens are not falsely extracted."""
     text = "John C. Smith evaluated section r. We go to market with high performance."
     skills = extract_skills(text)
     
     assert "C" not in skills
     assert "R" not in skills
     assert "Go" not in skills
+
+
+def test_subtoken_and_noise_isolation():
+    """Ensure compound names and degrees don't falsely extract sub-tokens or generic noise words."""
+    # 1. MySQL must not extract SQL
+    mysql_skills = extract_skills("Proficient in MySQL database management.")
+    assert "MySQL" in mysql_skills
+    assert "SQL" not in mysql_skills
+
+    # 2. JavaScript must not extract Java
+    js_skills = extract_skills("Developed frontend in JavaScript and ES6.")
+    assert "JavaScript" in js_skills
+    assert "Java" not in js_skills
+
+    # 3. Node.js and React.js must not extract JavaScript
+    node_skills = extract_skills("Backend service in Node.js and React.js.")
+    assert "Node.js" in node_skills
+    assert "React" in node_skills
+    assert "JavaScript" not in node_skills
+
+    # 4. Degrees and verbs must not extract bogus domain words
+    degree_skills = extract_skills("B.Tech in Computer Science and Engineering. Experienced in designing web architectures.")
+    assert "Engineering" not in degree_skills
+    assert "Design" not in degree_skills
+    assert "Designing" not in degree_skills
+    assert "Database" not in degree_skills
 
 
 def test_true_positive_for_single_letter_languages():
@@ -254,4 +280,42 @@ def test_letter_spaced_pdf_text_extraction_and_skills():
     ]
     for s in expected_skills:
         assert s in skills, f"Failed to extract '{s}' from letter-spaced text. Got: {skills}"
+
+
+def test_user_exact_programming_languages_web_db_tools_extraction():
+    """Test exact user resume skills section:
+    Programming Languages: Java, Python, C, JavaScript
+    Web Technologies: HTML, CSS, Bootstrap, React.js, Node.js
+    Database Management: SQL
+    Tools & Platforms: GitHub, VS Code , Eclipse, Jupyter Notebook
+    """
+    resume_section = """
+    Programming Languages : Java, Python, C, JavaScript
+    Web Technologies : HTML, CSS, Bootstrap, React.js, Node.js
+    Database Management : SQL
+    Tools & Platforms : GitHub, VS Code , Eclipse, Jupyter Notebook
+    """
+    skills = extract_skills(resume_section)
+
+    expected = [
+        "Bootstrap",
+        "C",
+        "CSS",
+        "Eclipse",
+        "Git",
+        "HTML",
+        "Java",
+        "JavaScript",
+        "Jupyter Notebook",
+        "Node.js",
+        "Python",
+        "React",
+        "SQL",
+        "VS Code",
+    ]
+    for s in expected:
+        assert s in skills, f"Expected '{s}' to be detected in resume skills, but got: {skills}"
+
+    assert len(skills) == len(expected), f"Unexpected extra skills detected: {set(skills) - set(expected)}"
+
 

@@ -8,6 +8,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from src.parsing.resume_parser import extract_metadata
 from src.models.classifier import load_classifier, predict_category
 from src.models.recommender import load_recommender, recommend_jobs

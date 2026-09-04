@@ -160,21 +160,7 @@ def normalize_text_for_skills(text: str) -> str:
     for placeholder, orig in placeholder_reverse.items():
         text = text.replace(placeholder, f" {orig} ")
 
-    # 9. CamelCase expansion (e.g. 'SpringBoot' -> 'SpringBoot Spring Boot', 'TestNG' -> 'TestNG Test NG')
-    def camel_expand(match):
-        w = match.group(0)
-        # Skip acronyms like AWS, HTML, CSS, SQL, GCP
-        if w.isupper() or len(w) <= 2:
-            return w
-        # Split on lower-to-upper transition
-        split_w = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", w)
-        if split_w != w:
-            return f"{w} {split_w}"
-        return w
-
-    text = re.sub(r"\b[A-Za-z0-9_+#.-]+\b", camel_expand, text)
-
-    # 10. Collapse consecutive whitespace and normalize lines
+    # 9. Collapse consecutive whitespace and normalize lines
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{2,}", "\n", text)
     return text.strip()
@@ -220,7 +206,7 @@ def load_skills_vocab(path: Union[str, Path] = config.SKILLS_VOCAB_PATH) -> Dict
         try:
             with open(path, "r", encoding="utf-8") as f:
                 vocab = json.load(f)
-                if isinstance(vocab, dict) and len(vocab) > 20:
+                if isinstance(vocab, dict) and len(vocab) >= 50:
                     _VOCAB_CACHE = vocab
                     _MATCHERS_CACHE = _compile_skill_matcher(vocab)
                     return vocab
@@ -248,13 +234,14 @@ def _compile_skill_matcher(vocab: Dict[str, List[str]]) -> List[Tuple[str, str, 
     for canonical, alias in alias_entries:
         escaped = re.escape(alias)
         # Symbols requiring lookarounds for word boundaries
-        if alias in ["c++", "c#", ".net", "ci/cd", "ui/ux", "node.js", "react.js", "vue.js", "next.js", "d3.js", "express.js", "angular.js", "nuxt.js", "nest.js", "py.test", "asp.net"]:
+        if any(ch in alias for ch in "+#./-"):
             pattern = re.compile(rf"(?<![a-zA-Z0-9]){escaped}(?![a-zA-Z0-9])", re.IGNORECASE)
         elif alias in ["c", "r", "go"]:
             # Strict contextual pattern requirement for single-letter / common word language names
             continue
         elif len(alias) <= 3:
-            pattern = re.compile(rf"(?<![a-zA-Z0-9+#.]){escaped}(?![a-zA-Z0-9+#.])", re.IGNORECASE)
+            # Short aliases (e.g. js, ts, css, sql) must not be attached to dots, slashes, hyphens, or alphanumerics
+            pattern = re.compile(rf"(?<![a-zA-Z0-9._/-]){escaped}(?![a-zA-Z0-9._/-])", re.IGNORECASE)
         else:
             pattern = re.compile(rf"\b{escaped}\b", re.IGNORECASE)
         compiled_matchers.append((canonical, alias, pattern))
@@ -310,19 +297,52 @@ def extract_skills(
             if canonical not in found_skills and pattern.search(padded_sec):
                 found_skills.add(canonical)
 
-    # 3. Explicit check for C, R, and Go programming when contextually mentioned
+    # 3. Explicit check for C, R, and Go programming when contextually mentioned in skills/languages list
     if "C" not in found_skills:
-        c_pattern = re.compile(r"\b(?:c\s*language|c\s*programming|c/c\+\+|embedded\s*c|ansi\s*c)\b", re.IGNORECASE)
+        c_pattern = re.compile(
+            r"(?:"
+            r"\b(?:c\s*language|c\s*programming|c/c\+\+|embedded\s*c|ansi\s*c)\b"
+            r"|"
+            r"(?:programming\s+languages?|languages?|technical\s+skills?|technologies|skills?)\s*:[^\n]*?(?<![a-zA-Z0-9+#.])C(?![a-zA-Z0-9+#.])"
+            r"|"
+            r"(?:java|python|c\+\+|c#|javascript|golang|rust|ruby|php|kotlin|scala|sql|html|css)\s*,\s*C(?![a-zA-Z0-9+#.])"
+            r"|"
+            r"(?<![a-zA-Z0-9+#.])C\s*,\s*(?:c\+\+|java|python|javascript|c#|sql|html|css)"
+            r")",
+            re.IGNORECASE,
+        )
         if c_pattern.search(padded_text):
             found_skills.add("C")
 
     if "R" not in found_skills:
-        r_pattern = re.compile(r"\b(?:r\s*language|r\s*programming|rstudio|r\s*shiny|r\s*package|cran|r-project)\b", re.IGNORECASE)
+        r_pattern = re.compile(
+            r"(?:"
+            r"\b(?:r\s*language|r\s*programming|rstudio|r\s*shiny|r\s*package|cran|r-project)\b"
+            r"|"
+            r"(?:programming\s+languages?|languages?|technical\s+skills?|technologies|skills?)\s*:[^\n]*?(?<![a-zA-Z0-9+#.])R(?![a-zA-Z0-9+#.])"
+            r"|"
+            r"(?:python|sql|java|matlab|sas|spss|c\+\+|scala|julia)\s*,\s*R(?![a-zA-Z0-9+#.])"
+            r"|"
+            r"(?<![a-zA-Z0-9+#.])R\s*,\s*(?:python|sql|java|matlab|sas|spss|c\+\+|scala|julia)"
+            r")",
+            re.IGNORECASE,
+        )
         if r_pattern.search(padded_text):
             found_skills.add("R")
 
     if "Go" not in found_skills:
-        go_pattern = re.compile(r"\b(?:golang|go\s*language|go\s*programming|go\s*developer)\b", re.IGNORECASE)
+        go_pattern = re.compile(
+            r"(?:"
+            r"\b(?:golang|go\s*language|go\s*programming|go\s*developer)\b"
+            r"|"
+            r"(?:programming\s+languages?|languages?|technical\s+skills?|technologies|skills?)\s*:[^\n]*?(?<![a-zA-Z0-9+#.])Go(?![a-zA-Z0-9+#.])"
+            r"|"
+            r"(?:python|java|c\+\+|rust|c#|javascript|typescript)\s*,\s*Go(?![a-zA-Z0-9+#.])"
+            r"|"
+            r"(?<![a-zA-Z0-9+#.])Go\s*,\s*(?:python|java|c\+\+|rust|c#|javascript|typescript)"
+            r")",
+            re.IGNORECASE,
+        )
         if go_pattern.search(padded_text):
             found_skills.add("Go")
 

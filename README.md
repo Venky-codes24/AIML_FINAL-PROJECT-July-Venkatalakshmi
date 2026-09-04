@@ -6,15 +6,16 @@ SmartHire is a classical machine learning application and AI/ML prototype (no ex
 
 ## 🌟 Key Features
 
-1. **Multi-Format Resume Parser**: Supports text extraction from **PDF**, **DOCX**, and **TXT** files with automatic normalization and verifiable metadata extraction (education, experience, contact details).
+1. **Multi-Format Resume Parser**: Supports text extraction from **PDF**, **DOCX**, and **TXT** files with automatic normalization, letter-spacing repair, and verifiable metadata extraction (education, experience, contact details).
 2. **Supervised Resume Category Classifier**: Predicts candidate role category across 25 target specializations using **TF-IDF + Logistic Regression** with confidence scoring and probability distributions.
 3. **Unsupervised Job Recommender**: Ranks and matches the candidate's resume against **136,000+ job listings** using memory-efficient **Sparse TF-IDF + Cosine Similarity** with active duplicate suppression.
 4. **Transparent Match Scoring**: Evaluates candidate-to-job similarity scored as `Match Score: X/100` (clearly distinguished from hiring probabilities).
-5. **Automated Skill Extraction**: Identifies technical and professional skills using canonical normalization and alias matching (e.g. `scikit-learn`, `sklearn`, `React.js`, `C++`, `Docker`, `AWS`).
-6. **Skill-Gap Analysis**: Performs exact matching against required job skills, categorizing them into **Matched Skills** and **Missing Skills**.
-7. **Prioritized Career Learning Path**: Identifies and ranks missing skills by demand frequency across recommended job matches.
+5. **Comprehensive Skill Extraction & Normalization**: High-precision vocabulary covering 100+ canonical technical domains with alias matching, symbol-awareness (`C++`, `C#`, `.NET`), context-isolated single-letter detection (`C`, `R`, `Go`), and compound isolation (`MySQL` vs `SQL`, `JavaScript` vs `Java`).
+6. **ATS Readiness Score & Optimization**: Deterministic 0-100 applicant tracking system compliance audit measuring section completeness, technical skill density, contact details, action-oriented verbs, and measurable impact metrics.
+7. **Skill-Gap Analysis & High-Demand Learning Path**: Identifies exact missing tools across top matches, prioritizing them into an 8-week actionable career roadmap and domain radar profile.
 8. **Explainable Multi-Factor Alignment**: Combines semantic text similarity, skill overlap, and role relevance into a transparent breakdown without synthetic labels.
-9. **Interactive Streamlit Web Portal**: Clean, responsive UI with distinct tabs for uploading resumes or trying demo sample documents.
+9. **Instant Assessment Report Export**: One-click generation of comprehensive, downloadable Markdown audit summaries.
+10. **Interactive Streamlit Web Portal**: Clean, modern UI with distinct tabs for file upload analysis, interactive demo profiles, and batch validation.
 
 ---
 
@@ -86,12 +87,15 @@ Smart_hire_AI_ML_June/
 │   │   └── preprocess.py             # Preprocessing & deduplication
 │   ├── features/
 │   │   ├── text_features.py          # TF-IDF feature helpers
-│   │   └── match_features.py         # Skill extraction, gaps & recommendations
+│   │   ├── match_features.py         # Skill extraction, gaps & recommendations
+│   │   ├── build_skills_vocab.py     # Skill taxonomy builder & validator
+│   │   └── career_insights.py        # ATS audit, career roadmaps & reports
 │   ├── models/
 │   │   ├── classifier.py             # Classifier training & prediction
 │   │   ├── recommender.py            # Cosine similarity matching & deduplication
 │   │   ├── clustering.py             # KMeans topic clustering
 │   │   ├── fit_predictor.py          # Explainable multi-factor fit scorer
+│   │   ├── salary_predictor.py       # Heuristic salary band estimator
 │   │   └── train.py                  # Unified CLI training script
 │   └── parsing/
 │       └── resume_parser.py          # PDF, DOCX, TXT parser & metadata extractor
@@ -99,7 +103,9 @@ Smart_hire_AI_ML_June/
 │   ├── test_features.py              # Tests for preprocessing & TF-IDF
 │   ├── test_parser.py                # Tests for PDF, DOCX, TXT parsing
 │   ├── test_classifier.py            # Tests for category classification
-│   └── test_recommender.py           # Tests for job matching & fit index
+│   ├── test_recommender.py           # Tests for job matching & fit index
+│   ├── test_skills_pipeline.py       # Precision tests for skills taxonomy
+│   └── verify_all.py                 # End-to-end multi-pipeline validation
 ├── download_data.py                  # Automated Kaggle dataset downloader
 ├── requirements.txt                  # Pinned Python dependencies
 ├── pytest.ini                        # Pytest configuration
@@ -117,8 +123,8 @@ Smart_hire_AI_ML_June/
 ### 2. Environment Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Anjali05R/Smart_hire_AI_ML_June.git
-cd Smart_hire_AI_ML_June
+git clone https://github.com/Venky-codes24/AIML_FINAL-PROJECT.git
+cd AIML_FINAL-PROJECT
 
 # Create and activate virtual environment
 python -m venv .venv
@@ -165,10 +171,11 @@ Run the complete test suite with pytest:
 python -m pytest -v
 ```
 
-All 16 test cases validate:
-- Text normalization and token sanitization
+All 34 test cases validate:
+- Text normalization, unicode handling, and token sanitization
 - PDF, DOCX, and TXT parsing with corrupted/empty file handling
-- Skill extraction and alias canonicalization
+- Advanced skill extraction, symbol handling (`C++`, `.NET`, `C#`), single-letter contextual guards (`C`, `R`, `Go`), and sub-token prevention (`MySQL` vs `SQL`)
+- ATS readiness scoring, contact detail detection, and metric discovery
 - Skill-gap computation and frequency ranking
 - TF-IDF vectorization and sparse matrix transformation
 - Resume classifier training and probability prediction
