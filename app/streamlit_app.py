@@ -47,474 +47,452 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for rich styling, card layout, and orange-accented modern UI matching mockup
-st.markdown(
-    """
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: #1E293B;
-    }
+def render_custom_styles(is_dark: bool = False):
+    """Render dynamic CSS tokens supporting smooth Light & Dark Mode transitions."""
+    bg_app = "#0B0F19" if is_dark else "#F8FAFC"
+    bg_sidebar = "#111827" if is_dark else "#FFFFFF"
+    bg_card = "#1E293B" if is_dark else "#FFFFFF"
+    border_card = "#334155" if is_dark else "#E2E8F0"
+    text_primary = "#F8FAFC" if is_dark else "#0F172A"
+    text_secondary = "#94A3B8" if is_dark else "#64748B"
+    text_body = "#CBD5E1" if is_dark else "#334155"
+    upload_bg = "#151F32" if is_dark else "#F8FAFC"
+    upload_border = "#475569" if is_dark else "#CBD5E1"
+    banner_bg = "#2A1810" if is_dark else "#FFF7ED"
+    banner_border = "#7C2D12" if is_dark else "#FFEDD5"
+    banner_text = "#FDBA74" if is_dark else "#9A3412"
+    theme_btn_bg = "#334155" if is_dark else "#FFFFFF"
+    theme_btn_border = "#475569" if is_dark else "#E2E8F0"
+    theme_btn_color = "#F8FAFC" if is_dark else "#0F172A"
 
-    /* Main background */
-    .stApp {
-        background-color: #F8FAFC;
-    }
+    st.markdown(
+        f"""
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Top Navigation / Header Bar */
-    .top-header-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0 1rem 0;
-        margin-bottom: 0.5rem;
-    }
+        :root {{
+            --bg-app: {bg_app};
+            --bg-card: {bg_card};
+            --border-card: {border_card};
+            --text-primary: {text_primary};
+            --text-secondary: {text_secondary};
+            --text-body: {text_body};
+        }}
 
-    .main-title-container {
-        display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-    }
+        html, body, [class*="css"] {{
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: {text_primary};
+        }}
 
-    .title-dark {
-        font-size: 2.3rem;
-        font-weight: 800;
-        color: #0F172A;
-        letter-spacing: -0.5px;
-    }
+        .stApp {{
+            background-color: {bg_app};
+            color: {text_primary};
+        }}
 
-    .title-orange {
-        font-size: 2.3rem;
-        font-weight: 800;
-        color: #FF5722;
-        letter-spacing: -0.5px;
-        position: relative;
-    }
+        [data-testid="stSidebar"] {{
+            background-color: {bg_sidebar};
+            border-right: 1px solid {border_card};
+        }}
 
-    .title-underline-accent {
-        width: 46px;
-        height: 4px;
-        background: #FF5722;
-        border-radius: 2px;
-        margin-top: -4px;
-    }
+        /* Titles */
+        .title-dark {{
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: {text_primary};
+            letter-spacing: -0.5px;
+        }}
 
-    .user-profile-header {
-        display: flex;
-        align-items: center;
-        gap: 0.9rem;
-    }
+        .title-orange {{
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: #FF5722;
+            letter-spacing: -0.5px;
+        }}
 
-    .theme-icon-btn {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
+        .title-underline-accent {{
+            width: 48px;
+            height: 4px;
+            background: #FF5722;
+            border-radius: 2px;
+            margin-top: -2px;
+        }}
 
-    .user-avatar-circle {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #FF5722;
-        color: #FFFFFF;
-        font-weight: 700;
-        font-size: 1.1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 6px rgba(255, 87, 34, 0.3);
-    }
+        /* User Profile in Header */
+        .user-profile-header {{
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 6px;
+        }}
 
-    .user-text-details {
-        display: flex;
-        flex-direction: column;
-    }
+        .user-avatar-circle {{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FF5722;
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.35);
+        }}
 
-    .user-welcome-sub {
-        font-size: 0.75rem;
-        color: #64748B;
-        font-weight: 500;
-        line-height: 1.1;
-    }
+        .user-welcome-sub {{
+            font-size: 0.75rem;
+            color: {text_secondary};
+            font-weight: 500;
+            line-height: 1.1;
+        }}
 
-    .user-welcome-name {
-        font-size: 0.95rem;
-        color: #0F172A;
-        font-weight: 700;
-        line-height: 1.2;
-    }
+        .user-welcome-name {{
+            font-size: 0.95rem;
+            color: {text_primary};
+            font-weight: 700;
+            line-height: 1.2;
+        }}
 
-    /* Feature Pill Badges */
-    .feature-pills-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
-    }
+        /* Theme Toggle Round Button */
+        div.st-key-theme_toggle_btn > button,
+        div[data-testid="stButton"].st-key-theme_toggle_btn button {{
+            width: 42px !important;
+            height: 42px !important;
+            min-width: 42px !important;
+            max-width: 42px !important;
+            border-radius: 50% !important;
+            background-color: {theme_btn_bg} !important;
+            border: 1px solid {theme_btn_border} !important;
+            color: {theme_btn_color} !important;
+            font-size: 1.2rem !important;
+            padding: 0 !important;
+            margin: 4px 0 0 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }}
+        div.st-key-theme_toggle_btn > button:hover {{
+            border-color: #FF5722 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.25) !important;
+        }}
 
-    .feature-pill-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        padding: 0.45rem 0.9rem;
-        border-radius: 10px;
-        font-size: 0.88rem;
-        font-weight: 600;
-        transition: transform 0.15s ease;
-    }
-    .feature-pill-badge:hover {
-        transform: translateY(-1px);
-    }
+        /* Feature Pill Badges */
+        .feature-pills-container {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            margin-top: 0.8rem;
+        }}
 
-    .pill-purple {
-        background-color: #F3E8FF;
-        color: #7E22CE;
-        border: 1px solid #E9D5FF;
-    }
+        .feature-pill-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: transform 0.15s ease;
+        }}
+        .feature-pill-badge:hover {{
+            transform: translateY(-1px);
+        }}
 
-    .pill-green {
-        background-color: #DCFCE7;
-        color: #15803D;
-        border: 1px solid #BBF7D0;
-    }
+        .pill-purple {{
+            background-color: {'#2E1065' if is_dark else '#F3E8FF'};
+            color: {'#DDD6FE' if is_dark else '#7E22CE'};
+            border: 1px solid {'#581C87' if is_dark else '#E9D5FF'};
+        }}
+        .pill-green {{
+            background-color: {'#064E3B' if is_dark else '#DCFCE7'};
+            color: {'#A7F3D0' if is_dark else '#15803D'};
+            border: 1px solid {'#065F46' if is_dark else '#BBF7D0'};
+        }}
+        .pill-pink {{
+            background-color: {'#831843' if is_dark else '#FCE7F3'};
+            color: {'#FBCFE8' if is_dark else '#BE185D'};
+            border: 1px solid {'#9D174D' if is_dark else '#FBCFE8'};
+        }}
+        .pill-orange {{
+            background-color: {'#7C2D12' if is_dark else '#FFEDD5'};
+            color: {'#FED7AA' if is_dark else '#C2410C'};
+            border: 1px solid {'#9A3412' if is_dark else '#FED7AA'};
+        }}
 
-    .pill-pink {
-        background-color: #FCE7F3;
-        color: #BE185D;
-        border: 1px solid #FBCFE8;
-    }
+        /* Cards */
+        .custom-card {{
+            background-color: {bg_card};
+            border: 1px solid {border_card};
+            border-radius: 16px;
+            padding: 1.4rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, {'0.25' if is_dark else '0.03'});
+            transition: all 0.2s ease-in-out;
+        }}
+        .custom-card:hover {{
+            border-color: {'#64748B' if is_dark else '#CBD5E1'};
+            box-shadow: 0 6px 24px -2px rgba(0, 0, 0, {'0.35' if is_dark else '0.06'});
+        }}
 
-    .pill-orange {
-        background-color: #FFEDD5;
-        color: #C2410C;
-        border: 1px solid #FED7AA;
-    }
+        .card-header-icon {{
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.8rem;
+        }}
 
-    /* Cards */
-    .custom-card {
-        background-color: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 1.4rem;
-        margin-bottom: 1.2rem;
-        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
-        transition: all 0.2s ease-in-out;
-    }
-    .custom-card:hover {
-        border-color: #CBD5E1;
-        box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.06);
-    }
+        .icon-box-orange {{
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background-color: {'#3F1A0A' if is_dark else '#FFF3E0'};
+            color: #FF5722;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }}
+        .icon-box-blue {{
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background-color: {'#0C2B47' if is_dark else '#E0F2FE'};
+            color: #0284C7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }}
+        .icon-box-green {{
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background-color: {'#0A341E' if is_dark else '#DCFCE7'};
+            color: #16A34A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }}
 
-    .card-header-icon {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.8rem;
-    }
+        .card-title-text {{
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: {text_primary};
+            margin: 0;
+        }}
+        .card-subtitle-text {{
+            font-size: 0.84rem;
+            color: {text_secondary};
+            margin: 0;
+        }}
 
-    .icon-box-orange {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        background-color: #FFF3E0;
-        color: #FF5722;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-    }
+        /* "What You'll Get" Grid */
+        .section-headline {{
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: {text_primary};
+            margin: 1.6rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }}
 
-    .icon-box-blue {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        background-color: #E0F2FE;
-        color: #0284C7;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-    }
+        .what-you-get-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }}
 
-    .icon-box-green {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        background-color: #DCFCE7;
-        color: #16A34A;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-    }
+        .benefit-card {{
+            background: {bg_card};
+            border: 1px solid {border_card};
+            border-radius: 14px;
+            padding: 1.15rem 1rem;
+            display: flex;
+            gap: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,{'0.2' if is_dark else '0.02'});
+        }}
 
-    .card-title-text {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #0F172A;
-        margin: 0;
-    }
+        .benefit-icon-wrapper {{
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }}
 
-    .card-subtitle-text {
-        font-size: 0.84rem;
-        color: #64748B;
-        margin: 0;
-    }
+        .benefit-title {{
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: {text_primary};
+            margin-bottom: 0.25rem;
+        }}
 
-    /* Dashed Upload Area */
-    .dashed-upload-box {
-        border: 2px dashed #CBD5E1;
-        border-radius: 12px;
-        background: #F8FAFC;
-        padding: 2.2rem 1.5rem;
-        text-align: center;
-        margin-top: 0.75rem;
-        transition: border-color 0.2s;
-    }
-    .dashed-upload-box:hover {
-        border-color: #FF5722;
-    }
+        .benefit-desc {{
+            font-size: 0.78rem;
+            color: {text_secondary};
+            line-height: 1.4;
+        }}
 
-    .upload-cloud-icon {
-        font-size: 2.2rem;
-        color: #64748B;
-        margin-bottom: 0.4rem;
-    }
+        /* Bottom Action Banner */
+        .cta-banner-card {{
+            background-color: {banner_bg};
+            border: 1px solid {banner_border};
+            border-radius: 14px;
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }}
 
-    .upload-main-text {
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: #1E293B;
-        margin-bottom: 0.15rem;
-    }
+        .cta-left-box {{
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }}
 
-    .upload-sub-text {
-        font-size: 0.82rem;
-        color: #64748B;
-        margin-bottom: 1rem;
-    }
+        .cta-lightbulb {{
+            font-size: 1.6rem;
+        }}
 
-    /* "What You'll Get" 4-Card Grid */
-    .section-headline {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: #0F172A;
-        margin: 1.6rem 0 1rem 0;
-        display: flex;
-        align-items: center;
-        gap: 0.45rem;
-    }
+        .cta-text-content {{
+            font-size: 0.88rem;
+            color: {banner_text};
+            font-weight: 500;
+        }}
 
-    .what-you-get-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.4rem;
-    }
+        /* Buttons */
+        div.stButton > button:not([key="theme_toggle_btn"]) {{
+            background-color: #FF5722;
+            color: #FFFFFF;
+            font-weight: 700;
+            border-radius: 10px;
+            border: none;
+            padding: 0.55rem 1.25rem;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25);
+        }}
+        div.stButton > button:not([key="theme_toggle_btn"]):hover {{
+            background-color: #F4511E;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.35);
+            transform: translateY(-1px);
+        }}
 
-    .benefit-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 14px;
-        padding: 1.15rem 1rem;
-        display: flex;
-        gap: 0.8rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
+        /* Skill Pill */
+        .skill-pill {{
+            display: inline-block;
+            background-color: {'#1E293B' if is_dark else '#F1F5F9'};
+            color: {text_primary};
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.22rem 0.6rem;
+            border-radius: 8px;
+            margin: 0.2rem 0.25rem 0.2rem 0;
+            border: 1px solid {border_card};
+        }}
+        .skill-pill-matched {{
+            background-color: {'#064E3B' if is_dark else '#ECFDF5'};
+            color: {'#A7F3D0' if is_dark else '#065F46'};
+            border: 1px solid {'#059669' if is_dark else '#A7F3D0'};
+        }}
+        .skill-pill-missing {{
+            background-color: {'#451A03' if is_dark else '#FFF7ED'};
+            color: {'#FDBA74' if is_dark else '#C2410C'};
+            border: 1px solid {'#7C2D12' if is_dark else '#FFD8A8'};
+        }}
 
-    .benefit-icon-wrapper {
-        width: 38px;
-        height: 38px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.15rem;
-        flex-shrink: 0;
-    }
+        .match-badge {{
+            display: inline-block;
+            background: #FF5722;
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            float: right;
+            box-shadow: 0 2px 6px rgba(255, 87, 34, 0.3);
+        }}
 
-    .benefit-title {
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 0.25rem;
-    }
+        .stat-box {{
+            text-align: center;
+            padding: 1.1rem 0.9rem;
+            background-color: {bg_card};
+            border-radius: 14px;
+            border: 1px solid {border_card};
+            box-shadow: 0 2px 8px rgba(0,0,0,{'0.2' if is_dark else '0.02'});
+        }}
+        .stat-number {{
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #FF5722;
+        }}
+        .stat-label {{
+            font-size: 0.82rem;
+            color: {text_secondary};
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }}
 
-    .benefit-desc {
-        font-size: 0.78rem;
-        color: #64748B;
-        line-height: 1.4;
-    }
+        .roadmap-step {{
+            background: {bg_card};
+            border: 1px solid {border_card};
+            border-left: 5px solid #FF5722;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.85rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,{'0.2' if is_dark else '0.02'});
+        }}
 
-    /* Bottom Action Banner */
-    .cta-banner-card {
-        background-color: #FFF7ED;
-        border: 1px solid #FFEDD5;
-        border-radius: 14px;
-        padding: 1rem 1.4rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-    }
+        .sidebar-brand-box {{
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 0 1rem 0;
+            margin-bottom: 0.5rem;
+        }}
+        .sidebar-brand-icon {{
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: {'#3F1A0A' if is_dark else '#FFF3E0'};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }}
+        .sidebar-brand-title {{
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: {text_primary};
+        }}
 
-    .cta-left-box {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-    }
+        .sidebar-bottom-card {{
+            background: {'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)' if is_dark else 'linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)'};
+            border: 1px solid {'#334155' if is_dark else '#FED7AA'};
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    .cta-lightbulb {
-        font-size: 1.6rem;
-    }
-
-    .cta-text-content {
-        font-size: 0.88rem;
-        color: #9A3412;
-        font-weight: 500;
-    }
-
-    /* Orange Buttons & Pill Styles */
-    div.stButton > button:first-child {
-        background-color: #FF5722;
-        color: #FFFFFF;
-        font-weight: 700;
-        border-radius: 10px;
-        border: none;
-        padding: 0.55rem 1.25rem;
-        transition: all 0.2s;
-        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25);
-    }
-    div.stButton > button:first-child:hover {
-        background-color: #F4511E;
-        color: #FFFFFF;
-        box-shadow: 0 4px 12px rgba(255, 87, 34, 0.35);
-        transform: translateY(-1px);
-    }
-
-    /* Skill Pill */
-    .skill-pill {
-        display: inline-block;
-        background-color: #F1F5F9;
-        color: #334155;
-        font-size: 0.82rem;
-        font-weight: 600;
-        padding: 0.22rem 0.6rem;
-        border-radius: 8px;
-        margin: 0.2rem 0.25rem 0.2rem 0;
-        border: 1px solid #E2E8F0;
-    }
-    .skill-pill-matched {
-        background-color: #ECFDF5;
-        color: #065F46;
-        border: 1px solid #A7F3D0;
-    }
-    .skill-pill-missing {
-        background-color: #FFF7ED;
-        color: #C2410C;
-        border: 1px solid #FFD8A8;
-    }
-
-    .match-badge {
-        display: inline-block;
-        background: #FF5722;
-        color: #FFFFFF;
-        font-weight: 700;
-        font-size: 0.95rem;
-        padding: 0.35rem 0.85rem;
-        border-radius: 20px;
-        float: right;
-        box-shadow: 0 2px 6px rgba(255, 87, 34, 0.3);
-    }
-
-    .meta-tag {
-        font-size: 0.85rem;
-        color: #475569;
-        margin-right: 1.2rem;
-        display: inline-block;
-    }
-
-    .stat-box {
-        text-align: center;
-        padding: 1.1rem 0.9rem;
-        background-color: #FFFFFF;
-        border-radius: 14px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-    .stat-number {
-        font-size: 1.55rem;
-        font-weight: 800;
-        color: #FF5722;
-    }
-    .stat-label {
-        font-size: 0.82rem;
-        color: #64748B;
-        font-weight: 600;
-        margin-top: 0.2rem;
-    }
-
-    .roadmap-step {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-left: 5px solid #FF5722;
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        margin-bottom: 0.85rem;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-
-    /* Sidebar Custom Styling */
-    [data-testid="stSidebar"] {
-        background-color: #FFFFFF;
-        border-right: 1px solid #E2E8F0;
-    }
-
-    .sidebar-brand-box {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0.5rem 0 1rem 0;
-        margin-bottom: 0.5rem;
-    }
-    .sidebar-brand-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: #FFF3E0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-    }
-    .sidebar-brand-title {
-        font-size: 1.45rem;
-        font-weight: 800;
-        color: #0F172A;
-    }
-
-    .sidebar-bottom-card {
-        background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-        border: 1px solid #FED7AA;
-        border-radius: 16px;
-        padding: 1.2rem 1rem;
-        text-align: center;
-        margin-top: 2rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 # Demo sample resumes strictly for demonstration/testing
 DEMO_SAMPLE_RESUMES = {
@@ -599,7 +577,7 @@ def check_model_status() -> Dict[str, bool]:
     }
 
 
-def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
+def render_radar_chart(domain_dist: Dict[str, int], is_dark: bool = False) -> go.Figure:
     """Generate interactive Plotly Radar / Spider Chart for skill domain distribution."""
     categories = list(domain_dist.keys())
     values = list(domain_dist.values())
@@ -613,24 +591,28 @@ def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
             r=values_closed,
             theta=categories_closed,
             fill="toself",
-            fillcolor="rgba(255, 87, 34, 0.20)",
+            fillcolor="rgba(255, 87, 34, 0.25)",
             line=dict(color="#FF5722", width=2.5),
             marker=dict(size=7, color="#E64A19"),
             name="Your Skills",
         )
     )
 
+    tick_col = "#94A3B8" if is_dark else "#64748B"
+    grid_col = "#334155" if is_dark else "#E2E8F0"
+    label_col = "#F8FAFC" if is_dark else "#1E293B"
+
     fig.update_layout(
         polar=dict(
             radialaxis=dict(
                 visible=True,
                 range=[0, max(4, max(values) + 1)],
-                tickfont=dict(size=10, color="#64748B"),
-                gridcolor="#E2E8F0",
+                tickfont=dict(size=10, color=tick_col),
+                gridcolor=grid_col,
             ),
             angularaxis=dict(
-                tickfont=dict(size=11, color="#1E293B", family="Plus Jakarta Sans"),
-                gridcolor="#E2E8F0",
+                tickfont=dict(size=11, color=label_col, family="Plus Jakarta Sans"),
+                gridcolor=grid_col,
             ),
         ),
         margin=dict(l=40, r=40, t=30, b=30),
@@ -642,7 +624,7 @@ def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
     return fig
 
 
-def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figure:
+def render_market_demand_chart(recommendations: List[Dict[str, Any]], is_dark: bool = False) -> go.Figure:
     """Generate interactive Plotly horizontal bar chart for top in-demand skills in matched jobs."""
     skill_counts = {}
     for job in recommendations:
@@ -671,10 +653,14 @@ def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figu
         )
     )
 
+    title_col = "#F8FAFC" if is_dark else "#1E293B"
+    grid_col = "#1E293B" if is_dark else "#F1F5F9"
+    axis_col = "#94A3B8" if is_dark else "#64748B"
+
     fig.update_layout(
-        title=dict(text="Top Skills Demanded Across Recommended Jobs", font=dict(size=13, color="#1E293B", family="Plus Jakarta Sans")),
-        xaxis=dict(title="Occurrence Count in Matches", tickfont=dict(size=10), gridcolor="#F1F5F9"),
-        yaxis=dict(tickfont=dict(size=11, color="#1E293B")),
+        title=dict(text="Top Skills Demanded Across Recommended Jobs", font=dict(size=13, color=title_col, family="Plus Jakarta Sans")),
+        xaxis=dict(title="Occurrence Count in Matches", tickfont=dict(size=10, color=axis_col), gridcolor=grid_col),
+        yaxis=dict(tickfont=dict(size=11, color=title_col)),
         margin=dict(l=20, r=20, t=40, b=30),
         height=320,
         paper_bgcolor="rgba(0,0,0,0)",
@@ -684,7 +670,9 @@ def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figu
 
 
 def main():
-    # Initialize session state for persistent resume text
+    # Initialize session state for persistent theme and resume text
+    if "dark_mode" not in st.session_state:
+        st.session_state["dark_mode"] = False
     if "active_resume_text" not in st.session_state:
         st.session_state["active_resume_text"] = ""
     if "active_source_label" not in st.session_state:
@@ -692,8 +680,11 @@ def main():
     if "saved_jobs" not in st.session_state:
         st.session_state["saved_jobs"] = []
 
+    is_dark = st.session_state["dark_mode"]
+    render_custom_styles(is_dark)
+
     # =========================================================================
-    # SIDEBAR NAVIGATION (Matching Mockup)
+    # SIDEBAR NAVIGATION
     # =========================================================================
     with st.sidebar:
         st.markdown(
@@ -735,28 +726,23 @@ def main():
                     st.cache_resource.clear()
                     st.rerun()
 
-        # Sidebar illustration matching bottom card in mockup
+        # Sidebar illustration matching mockup
         st.markdown(
-            """
+            f"""
             <div class="sidebar-bottom-card">
-                <svg width="130" height="100" viewBox="0 0 130 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="65" cy="50" r="42" fill="#FED7AA" fill-opacity="0.4"/>
-                    <!-- Desk -->
-                    <rect x="25" y="70" width="80" height="5" rx="2.5" fill="#C2410C"/>
-                    <!-- Laptop -->
-                    <rect x="50" y="56" width="30" height="14" rx="2" fill="#1E293B"/>
-                    <rect x="53" y="58" width="24" height="10" rx="1" fill="#FF5722"/>
-                    <path d="M46 70H84L80 73H50L46 70Z" fill="#64748B"/>
-                    <!-- Person sitting -->
-                    <circle cx="65" cy="36" r="10" fill="#EA580C"/>
-                    <path d="M53 66C53 52 77 52 77 66H53Z" fill="#F97316"/>
-                    <!-- Plant -->
-                    <rect x="33" y="63" width="7" height="7" rx="1" fill="#EA580C"/>
-                    <path d="M36.5 56C34 58 35 63 36.5 63C38 63 39 58 36.5 56Z" fill="#10B981"/>
-                    <path d="M33 58C31 60 33 63 35 63" stroke="#059669" stroke-width="1.5"/>
+                <svg width="130" height="95" viewBox="0 0 130 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="65" cy="48" r="40" fill="#FED7AA" fill-opacity="0.35"/>
+                    <rect x="25" y="68" width="80" height="5" rx="2.5" fill="#C2410C"/>
+                    <rect x="50" y="54" width="30" height="14" rx="2" fill="#1E293B"/>
+                    <rect x="53" y="56" width="24" height="10" rx="1" fill="#FF5722"/>
+                    <path d="M46 68H84L80 71H50L46 68Z" fill="#64748B"/>
+                    <circle cx="65" cy="34" r="10" fill="#EA580C"/>
+                    <path d="M53 64C53 50 77 50 77 64H53Z" fill="#F97316"/>
+                    <rect x="33" y="61" width="7" height="7" rx="1" fill="#EA580C"/>
+                    <path d="M36.5 54C34 56 35 61 36.5 61C38 61 39 56 36.5 54Z" fill="#10B981"/>
                 </svg>
-                <div style="font-size:0.82rem; font-weight:700; color:#9A3412; margin-top:0.4rem;">AI Career Assistant</div>
-                <div style="font-size:0.72rem; color:#C2410C;">Ready to help you succeed</div>
+                <div style="font-size:0.82rem; font-weight:700; color:{'#FED7AA' if is_dark else '#9A3412'}; margin-top:0.4rem;">AI Career Assistant</div>
+                <div style="font-size:0.72rem; color:{'#94A3B8' if is_dark else '#C2410C'};">Empowering your career journey</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -909,6 +895,12 @@ def main():
             """,
             unsafe_allow_html=True,
         )
+        st.markdown("### 🎨 Display Preferences")
+        new_theme = st.toggle("🌙 Dark Mode Theme", value=is_dark, key="dark_toggle_setting")
+        if new_theme != is_dark:
+            st.session_state["dark_mode"] = new_theme
+            st.rerun()
+
         st.markdown("### ⚙️ Matching Configuration")
         top_n = st.slider("Number of Top Matches", min_value=3, max_value=15, value=config.TOP_N)
         cat_filter = st.text_input("Filter by Job Title / Keyword", placeholder="e.g. Data Scientist, Java, Engineer")
@@ -948,18 +940,18 @@ def main():
             unsafe_allow_html=True,
         )
         if not st.session_state["saved_jobs"]:
-            st.info("No saved jobs yet! Click bookmark on recommended jobs to save them here.")
+            st.info("No saved jobs yet! Recommended jobs will appear here when saved.")
         else:
             for job in st.session_state["saved_jobs"]:
                 st.markdown(
                     f"""
                     <div class="custom-card">
                         <span class="match-badge">Match: {job.get('match_score', 'N/A')}/100</span>
-                        <h4 style="margin:0 0 0.3rem 0; color:#0F172A;">{job.get('title')}</h4>
-                        <div style="font-size:0.85rem; color:#475569; margin-bottom:0.5rem;">
+                        <h4 style="margin:0 0 0.3rem 0; color:{'#F8FAFC' if is_dark else '#0F172A'};">{job.get('title')}</h4>
+                        <div style="font-size:0.85rem; color:{'#94A3B8' if is_dark else '#475569'}; margin-bottom:0.5rem;">
                             🏢 <strong>{job.get('company')}</strong> | 📍 {job.get('location')} | ⏳ Experience: {job.get('experience')}
                         </div>
-                        <div style="font-size:0.88rem; color:#334155;">{job.get('description_snippet')}</div>
+                        <div style="font-size:0.88rem; color:{'#CBD5E1' if is_dark else '#334155'};">{job.get('description_snippet')}</div>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -967,30 +959,45 @@ def main():
         return
 
     # =========================================================================
-    # MAIN CANDIDATE CAREER HUB HEADER (Matching Mockup)
+    # MAIN CANDIDATE CAREER HUB HEADER (Matching Mockup with Interactive Theme Toggle)
     # =========================================================================
-    st.markdown(
-        """
-        <div class="top-header-row">
+    head_col_title, head_col_theme, head_col_user = st.columns([72, 6, 22])
+
+    with head_col_title:
+        st.markdown(
+            """
             <div>
-                <div class="main-title-container">
+                <div style="display: flex; align-items: baseline; gap: 0.5rem;">
                     <span class="title-dark">SmartHire</span>
                     <span class="title-orange">Career Hub</span>
                 </div>
                 <div class="title-underline-accent"></div>
             </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with head_col_theme:
+        # Interactive Theme Toggle Button (🌙 -> ☀️)
+        theme_icon = "☀️" if is_dark else "🌙"
+        theme_tooltip = "Switch to Light Mode" if is_dark else "Switch to Dark Mode"
+        if st.button(theme_icon, key="theme_toggle_btn", help=theme_tooltip):
+            st.session_state["dark_mode"] = not is_dark
+            st.rerun()
+
+    with head_col_user:
+        st.markdown(
+            f"""
             <div class="user-profile-header">
-                <div class="theme-icon-btn" title="Toggle Theme">🌙</div>
                 <div class="user-avatar-circle">V</div>
-                <div class="user-text-details">
+                <div style="display: flex; flex-direction: column;">
                     <span class="user-welcome-sub">Welcome</span>
                     <span class="user-welcome-name">Venky <span style="font-size:0.75rem; color:#64748B;">▾</span></span>
                 </div>
             </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            """,
+            unsafe_allow_html=True,
+        )
 
     # Feature Pill Badges Row (Matching Mockup)
     st.markdown(
@@ -1291,14 +1298,14 @@ def main():
                     f"""
                     <div class="custom-card">
                         <span class="match-badge">Match: {score}/100</span>
-                        <h4 style="margin: 0 0 0.35rem 0; color: #0F172A;">#{rank}. {title}</h4>
+                        <h4 style="margin: 0 0 0.35rem 0; color: {'#F8FAFC' if is_dark else '#0F172A'};">#{rank}. {title}</h4>
                         <div style="margin-bottom: 0.6rem;">
                             <span class="meta-tag">🏢 <strong>{company}</strong></span>
                             <span class="meta-tag">📍 {location}</span>
                             <span class="meta-tag">⏳ Experience: {exp}</span>
                             <span class="meta-tag" style="text-transform: capitalize;">🌐 Source: {source}</span>
                         </div>
-                        <div style="font-size: 0.9rem; color: #334155; margin-bottom: 0.8rem; line-height: 1.45;">
+                        <div style="font-size: 0.9rem; color: {'#CBD5E1' if is_dark else '#334155'}; margin-bottom: 0.8rem; line-height: 1.45;">
                             {snippet}
                         </div>
                         <div style="margin-top: 0.5rem;">
@@ -1351,11 +1358,11 @@ def main():
         chart_col1, chart_col2 = st.columns(2)
         with chart_col1:
             st.markdown("**Technical Domain Distribution (Radar Chart)**")
-            radar_fig = render_radar_chart(domain_dist)
+            radar_fig = render_radar_chart(domain_dist, is_dark=is_dark)
             st.plotly_chart(radar_fig, use_container_width=True)
         with chart_col2:
             st.markdown("**Employer Skill Demand Across Matches**")
-            demand_fig = render_market_demand_chart(recommendations)
+            demand_fig = render_market_demand_chart(recommendations, is_dark=is_dark)
             st.plotly_chart(demand_fig, use_container_width=True)
 
     # 4. ROADMAP SECTION
@@ -1367,13 +1374,13 @@ def main():
             st.markdown(
                 f"""
                 <div class="roadmap-step">
-                    <div style="font-size: 1.05rem; font-weight: 700; color: #0F172A; margin-bottom: 0.3rem;">
+                    <div style="font-size: 1.05rem; font-weight: 700; color: {'#F8FAFC' if is_dark else '#0F172A'}; margin-bottom: 0.3rem;">
                         {stage['phase']} <span style="font-size: 0.85rem; color: #FF5722; font-weight: 600;">({stage['timeline']})</span>
                     </div>
-                    <div style="font-size: 0.92rem; color: #475569; margin-bottom: 0.5rem;">
+                    <div style="font-size: 0.92rem; color: {'#94A3B8' if is_dark else '#475569'}; margin-bottom: 0.5rem;">
                         <strong>Target Focus:</strong> {stage['goal']}
                     </div>
-                    <ul style="font-size: 0.88rem; color: #334155; margin-bottom: 0; padding-left: 1.2rem;">
+                    <ul style="font-size: 0.88rem; color: {'#CBD5E1' if is_dark else '#334155'}; margin-bottom: 0; padding-left: 1.2rem;">
                         {''.join([f'<li>{item}</li>' for item in stage['action_items']])}
                     </ul>
                 </div>
