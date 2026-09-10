@@ -114,84 +114,245 @@ Smart_hire_AI_ML_June/
 
 ---
 
-## ⚡ Quickstart Guide
+## ⚡ How to Run the Program (Step-by-Step with Comments)
+
+Follow these steps to set up the environment and run the application locally:
 
 ### 1. Prerequisites
 - **Python 3.10+** (tested on Python 3.11 and 3.12)
-- Git
+- **Git**
 
-### 2. Environment Setup
+### 2. Clone the Repository & Set Up Environment
 ```bash
-# Clone the repository
+# Clone the project repository from GitHub
 git clone https://github.com/Venky-codes24/AIML_FINAL-PROJECT.git
+
+# Navigate into the project root directory
 cd AIML_FINAL-PROJECT
 
-# Create and activate virtual environment
+# Create a dedicated Python virtual environment named '.venv'
 python -m venv .venv
 
-# Windows (PowerShell)
+# --- Activate the Virtual Environment ---
+# On Windows (PowerShell):
 .venv\Scripts\Activate.ps1
-# Windows (cmd)
+
+# On Windows (Command Prompt):
 .venv\Scripts\activate.bat
-# Linux / macOS
+
+# On Linux / macOS:
 source .venv/bin/activate
 
-# Install dependencies
+# Upgrade pip to the latest version
+python -m pip install --upgrade pip
+
+# Install all pinned dependencies (Streamlit, Scikit-learn, Pandas, PyPDF, etc.)
 pip install -r requirements.txt
 ```
 
-### 3. Download Datasets
+### 3. Download Raw Datasets (First-Time Setup Only)
 ```bash
+# Automatically downloads raw Kaggle datasets (Resume dataset & 136k+ job postings)
 python download_data.py
 ```
 
-### 4. Preprocess Data
+### 4. Preprocess Data & Clean Text
 ```bash
+# Cleans raw text, handles missing fields, and generates processed datasets:
+# - data/processed/resumes_clean.csv (962 labeled resumes across 25 categories)
+# - data/processed/jobs_clean.csv (136,759 cleaned job postings)
 python -m src.data.preprocess
 ```
 
-### 5. Train Models & Build Sparse Indices
-Train the resume classifier and build the sparse recommender index (run once):
+### 5. Train Models & Build Feature Indices
 ```bash
+# Trains the supervised TF-IDF + Logistic Regression classifier (99.48% accuracy)
+# Builds the sparse TF-IDF job catalog matrix (136k+ postings, 10,000 features)
+# Exports canonical skills taxonomy dictionary (models/skills_vocab.json)
 python -m src.models.train
 ```
 
-### 6. Launch the Web Application
+> **Note:** Pre-trained model artifacts are already included in the `models/` directory. If they exist, you can skip steps 3–5 and immediately launch the web app below.
+
+### 6. Launch the Interactive Streamlit Web Portal
 ```bash
+# Launch the Streamlit application locally on default port 8501
 streamlit run app/streamlit_app.py
+
+# Optional: Run on custom port or expose to local network
+streamlit run app/streamlit_app.py --server.port 8501 --server.address 0.0.0.0
+
+# Optional: Run in headless mode (ideal for remote servers/VMs)
+streamlit run app/streamlit_app.py --server.headless true --server.port 8501
 ```
-Open your browser at **`http://localhost:8501`**.
+- Open your web browser and navigate to: **`http://localhost:8501`** (or `http://<your-server-ip>:8501`).
+- You can upload your own **PDF**, **DOCX**, or **TXT** resume, or click on any of the built-in **Demo Sample Profiles** in the sidebar to test instantly.
+- To stop the server at any time, press **`Ctrl + C`** in your terminal.
 
 ---
 
-## 🧪 Running Unit Tests
+## 🎯 Accuracy Checking & Model Evaluation (Commands with Comments)
 
-Run the complete test suite with pytest:
+SmartHire includes comprehensive test suites and automated evaluation scripts to verify model accuracy, taxonomy precision, and end-to-end pipeline integrity.
+
+### 1. Run Complete Automated Test Suite (All 34 Tests)
 ```bash
+# Run the complete test suite with detailed test-by-test breakdown
 python -m pytest -v
+
+# Run the test suite in concise summary mode
+python -m pytest -q
+```
+*Expected Result:* **`34 passed`** in under 30 seconds.
+
+### 2. Verify Resume Classifier Accuracy & Metrics
+```bash
+# Run isolated tests for the supervised resume category classifier
+# Checks that model test accuracy exceeds the 95% threshold and top-3 probabilities calibrate properly
+python -m pytest tests/test_classifier.py -v
 ```
 
-All 34 test cases validate:
-- Text normalization, unicode handling, and token sanitization
-- PDF, DOCX, and TXT parsing with corrupted/empty file handling
-- Advanced skill extraction, symbol handling (`C++`, `.NET`, `C#`), single-letter contextual guards (`C`, `R`, `Go`), and sub-token prevention (`MySQL` vs `SQL`)
-- ATS readiness scoring, contact detail detection, and metric discovery
-- Skill-gap computation and frequency ranking
-- TF-IDF vectorization and sparse matrix transformation
-- Resume classifier training and probability prediction
-- Job recommendation ranking and category filtering
-- Explainable multi-factor fit scoring calculation
+To re-run training and display the exact accuracy and F1 scores in terminal:
+```bash
+# Trains and outputs classification accuracy, macro F1, and weighted F1
+python -m src.models.train
+```
+*Output Metrics:*
+- **Test Accuracy**: **`99.48%`**
+- **Macro F1-Score**: **`0.9945`**
+- **Weighted F1-Score**: **`0.9949`**
+- **Total Categories**: 25 specialized tech domains
+
+### 3. Check Skills Disambiguation & Token Precision (100% Precision)
+```bash
+# Tests the high-precision skill extraction engine against edge-case ambiguities:
+# - Validates symbol-heavy languages: C++, C#, .NET
+# - Validates context-isolated single letters: 'C', 'R', 'Go' (no false triggers in words like 'Docker', 'React')
+# - Validates compound sub-token guards: 'MySQL' does not trigger 'SQL', 'JavaScript' does not trigger 'Java'
+python -m pytest tests/test_skills_pipeline.py -v
+```
+
+### 4. Run End-to-End System Integrity Verification
+```bash
+# Executes an end-to-end integration test through all 9 core and optional system pipelines:
+# 1. Resume Parsing & Metadata Extraction
+# 2. Supervised Category Classification
+# 3. High-Precision Skills Extraction
+# 4. Sparse Job Catalog Indexing
+# 5. Cosine Similarity Matching & Deduplication
+# 6. Candidate Fit Alignment Scoring
+# 7. High-Demand Skill Gap & Learning Roadmap
+# 8. Salary Band Estimation
+# 9. KMeans Role Topic Clustering
+python tests/verify_all.py
+```
+*Expected Output:* `>>> ALL 9 CORE & OPTIONAL PIPELINES VERIFIED SUCCESSFULLY! <<<`
+
+### 5. Inspect Visual Confusion Matrix
+When training finishes, a high-resolution 25-category confusion matrix is generated and saved to:
+```
+reports/figures/confusion_matrix.png
+```
+You can inspect this image to visually examine per-category classification precision across all 25 specializations.
 
 ---
 
-## 📊 Model Evaluation Results
+## 🚀 Deployment Guide (How to Deploy SmartHire)
 
-- **Resume Classifier Architecture**: TF-IDF (5,000 features, unigrams + bigrams) + Logistic Regression (L2 regularization, balanced weights)
-- **Classifier Performance**:
-  - Test Accuracy: **99.48%**
-  - Macro F1-Score: **0.9945**
-  - Weighted F1-Score: **0.9949**
-- **Recommender Architecture**: Memory-efficient Sparse TF-IDF (10,000 unigrams) + Cosine Similarity over 136,759 postings with near-duplicate suppression.
+SmartHire can be deployed to the cloud using any of the following approaches:
+
+### Option A: Streamlit Community Cloud (Recommended & Free)
+The easiest way to deploy SmartHire publicly with a live URL:
+
+1. **Push your code to GitHub**:
+   Ensure your code is pushed to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Prepare repository for deployment"
+   git push origin main
+   ```
+2. **Handle Model Artifacts**:
+   The trained model artifacts in `models/` total ~96 MB (`job_matrix.pkl` is ~44 MB, `job_metadata.pkl` is ~49 MB).
+   - If tracking models in git: Each file is under GitHub's 100 MB hard limit.
+   - Alternatively, track them via **Git LFS** or upload them to a release/cloud storage bucket.
+3. **Deploy on Streamlit Cloud**:
+   - Go to [share.streamlit.io](https://share.streamlit.io) and log in with GitHub.
+   - Click **"New app"**.
+   - Select your repository: `Venky-codes24/AIML_FINAL-PROJECT`.
+   - Set **Branch**: `main`.
+   - Set **Main file path**: `app/streamlit_app.py`.
+   - Click **"Deploy!"**.
+   - Streamlit will automatically read `requirements.txt`, install dependencies, and launch the portal with a public `https://<your-app-name>.streamlit.app` URL.
+
+---
+
+### Option B: Docker Container Deployment (Cloud / VPS / Render / Railway)
+SmartHire comes with a production-ready `Dockerfile` and `.dockerignore`.
+
+#### 1. Build the Docker Image
+```bash
+# Build the container image tagged as 'smarthire-engine'
+docker build -t smarthire-engine .
+```
+
+#### 2. Run the Container
+```bash
+# Run container in detached mode (-d) mapping host port 8501 to container port 8501
+docker run -d -p 8501:8501 --name smarthire-app smarthire-engine
+```
+- Access the app at: **`http://localhost:8501`**.
+
+#### 3. View Logs or Stop Container
+```bash
+# View real-time container application logs
+docker logs -f smarthire-app
+
+# Stop the container
+docker stop smarthire-app
+
+# Remove container
+docker rm smarthire-app
+```
+
+#### Deploying Container to Cloud Hosts:
+- **Render.com**: Create a new **Web Service** -> Link GitHub -> Select **Docker** environment -> Deploy. Set port to `8501`.
+- **Railway.app**: New Project -> Deploy from GitHub -> Railway detects the `Dockerfile` automatically.
+- **AWS ECS / Google Cloud Run / Azure Container Apps**: Push `smarthire-engine` to Amazon ECR or Google Artifact Registry and launch a serverless container.
+
+---
+
+### Option C: Hugging Face Spaces (Free 16 GB RAM CPU Tier)
+Hugging Face Spaces offers a generous 16 GB RAM CPU tier, making it ideal for large text corpora and sparse matrices:
+
+1. Create a free account on [huggingface.co](https://huggingface.co).
+2. Go to **Spaces** -> **Create new Space**.
+3. Set **SDK** to **Streamlit** and choose **Public**.
+4. Clone the Space repository locally or link it directly with your GitHub repo.
+5. Ensure `requirements.txt` and `app/streamlit_app.py` are present in root or configure `app_file: app/streamlit_app.py` in the `README.md` metadata.
+6. Hugging Face automatically spins up the instance and serves the live web application.
+
+---
+
+### Option D: Ubuntu / Debian Linux Virtual Machine (AWS EC2 / DigitalOcean)
+To host on a dedicated Linux VPS:
+
+```bash
+# 1. Update system and install Python + Git
+sudo apt-get update && sudo apt-get install -y python3-pip python3-venv git
+
+# 2. Clone repo and enter folder
+git clone https://github.com/Venky-codes24/AIML_FINAL-PROJECT.git
+cd AIML_FINAL-PROJECT
+
+# 3. Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 4. Run with nohup or systemd in the background
+nohup streamlit run app/streamlit_app.py --server.port 8501 --server.address 0.0.0.0 > app.log 2>&1 &
+```
+- For production domains, set up **Nginx** as a reverse proxy forwarding port 80/443 to `http://127.0.0.1:8501` and configure free SSL with **Certbot** (`sudo certbot --nginx`).
 
 ---
 

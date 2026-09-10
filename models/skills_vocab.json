@@ -8,22 +8,22 @@
   ],
   "CSS": [
     "css 3",
-    "scss",
-    "css3",
-    "less",
     "sass",
+    "less",
+    "css3",
+    "scss",
     "css"
   ],
   "JavaScript": [
     "java script",
-    "vanilla js",
-    "ecmascript",
     "javascript",
+    "ecmascript",
+    "vanilla js",
     "es2020",
     "es2015",
     "es7",
-    "es8",
     "es6",
+    "es8",
     "js"
   ],
   "TypeScript": [
@@ -32,22 +32,22 @@
     "ts"
   ],
   "Angular": [
-    "angular 10",
-    "angular 17",
     "angular 2+",
-    "angular 16",
     "angular 14",
-    "angular.js",
     "angular 15",
-    "angular 8",
-    "angularjs",
+    "angular.js",
+    "angular 16",
+    "angular 17",
+    "angular 10",
     "angular 4",
     "angular 2",
+    "angular 8",
+    "angularjs",
     "angular"
   ],
   "React": [
-    "react-native",
     "react native",
+    "react-native",
     "react.js",
     "reactjs",
     "react"
@@ -55,8 +55,8 @@
   "Vue.js": [
     "nuxt.js",
     "vue.js",
-    "vuejs",
     "vue 3",
+    "vuejs",
     "nuxt",
     "vuex",
     "vue"
@@ -66,8 +66,8 @@
     "nextjs"
   ],
   "Svelte": [
-    "svelte.js",
     "sveltekit",
+    "svelte.js",
     "svelte"
   ],
   "Tailwind CSS": [
@@ -102,30 +102,30 @@
   ],
   "WebSockets": [
     "websockets",
-    "socket.io",
-    "websocket"
+    "websocket",
+    "socket.io"
   ],
   "jQuery": [
     "jquery"
   ],
   "Python": [
+    "cpython",
     "python2",
     "python3",
-    "cpython",
     "python",
     "py3"
   ],
   "Java": [
     "advanced java",
     "core java",
+    "java ee",
+    "java 21",
+    "java se",
     "java 11",
     "java 17",
-    "java se",
-    "java 21",
-    "java ee",
     "java 8",
-    "j2se",
     "j2ee",
+    "j2se",
     "java"
   ],
   "C++": [
@@ -136,14 +136,14 @@
   "C#": [
     "c-sharp",
     "c sharp",
-    "c#.net",
     "csharp",
+    "c#.net",
     "c#"
   ],
   "C": [
     "c programming",
-    "embedded c",
     "c language",
+    "embedded c",
     "ansi c",
     "c/c++",
     "c"
@@ -154,8 +154,8 @@
     "r-project",
     "r package",
     "r studio",
-    "rstudio",
     "r shiny",
+    "rstudio",
     "cran",
     "r"
   ],
@@ -204,9 +204,9 @@
   "Bash/Shell": [
     "shell scripting",
     "shell script",
-    "powershell",
     "bash/shell",
     "unix shell",
+    "powershell",
     "bash",
     "zsh"
   ],
@@ -225,8 +225,8 @@
     "asp.net core",
     ".net core",
     "asp.net",
-    "vb.net",
     "dotnet",
+    "vb.net",
     ".net"
   ],
   "Node.js": [
@@ -240,8 +240,8 @@
     "express"
   ],
   "NestJS": [
-    "nest js",
     "nest.js",
+    "nest js",
     "nestjs"
   ],
   "Django": [
@@ -285,8 +285,8 @@
   ],
   "RabbitMQ": [
     "rabbit mq",
-    "rabbitmq",
-    "activemq"
+    "activemq",
+    "rabbitmq"
   ],
   "gRPC": [
     "protocol buffers",
@@ -313,20 +313,20 @@
   ],
   "Cucumber": [
     "cucumber testing",
-    "cucumber-jvm",
     "cucumber bdd",
+    "cucumber-jvm",
     "cucumber",
     "gherkin"
   ],
   "TestNG": [
     "testng framework",
-    "test ng",
     "test-ng",
+    "test ng",
     "testng"
   ],
   "JUnit": [
-    "junit 5",
     "junit 4",
+    "junit 5",
     "junit"
   ],
   "PyTest": [
@@ -358,19 +358,19 @@
   "JMeter": [
     "apache jmeter",
     "load testing",
-    "locust",
-    "jmeter"
+    "jmeter",
+    "locust"
   ],
   "Software Testing": [
     "performance testing",
-    "regression testing",
     "functional testing",
-    "white box testing",
+    "regression testing",
     "black box testing",
     "quality assurance",
+    "white box testing",
     "software testing",
-    "sanity testing",
     "system testing",
+    "sanity testing",
     "manual testing",
     "test planning",
     "qa engineer",
@@ -400,8 +400,8 @@
   "SQL": [
     "transact-sql",
     "oracle sql",
-    "sqlite",
     "pl/sql",
+    "sqlite",
     "plsql",
     "t-sql",
     "sql"
@@ -410,8 +410,8 @@
     "documentdb",
     "mongo db",
     "mongodb",
-    "nosql",
-    "mongo"
+    "mongo",
+    "nosql"
   ],
   "Redis": [
     "redis cache",
@@ -434,9 +434,9 @@
   "Oracle DB": [
     "oracle database",
     "oracle rdbms",
-    "oracle 12c",
-    "oracle 19c",
     "oracle 11g",
+    "oracle 19c",
+    "oracle 12c",
     "oracle db"
   ],
   "Cassandra": [
@@ -468,10 +468,10 @@
     "large language models (llms)",
     "large language models",
     "prompt engineering",
-    "chatgpt",
     "mistral",
-    "claude",
+    "chatgpt",
     "gemini",
+    "claude",
     "llama",
     "gpt-4",
     "llms",
@@ -486,10 +486,10 @@
   ],
   "RAG (Retrieval-Augmented Generation)": [
     "rag (retrieval-augmented generation)",
-    "retrieval augmented generation",
     "retrieval-augmented generation",
-    "vector search",
+    "retrieval augmented generation",
     "hybrid search",
+    "vector search",
     "rag"
   ],
   "Vector Databases": [
@@ -497,10 +497,10 @@
     "vector database",
     "vector db",
     "weaviate",
-    "pinecone",
     "chromadb",
-    "milvus",
+    "pinecone",
     "qdrant",
+    "milvus",
     "chroma",
     "faiss"
   ],
@@ -533,13 +533,13 @@
     "sentiment analysis",
     "text mining",
     "spacy",
-    "nltk",
     "bert",
+    "nltk",
     "nlp"
   ],
   "Computer Vision": [
-    "image processing",
     "object detection",
+    "image processing",
     "computer vision",
     "segmentation",
     "open cv",
@@ -558,8 +558,8 @@
     "keras"
   ],
   "Scikit-learn": [
-    "scikit learn",
     "scikit-learn",
+    "scikit learn",
     "sklearn"
   ],
   "Pandas": [
@@ -618,16 +618,16 @@
     "hdfs"
   ],
   "Databricks": [
-    "delta lake",
-    "databricks"
+    "databricks",
+    "delta lake"
   ],
   "Apache Airflow": [
-    "apache airflow",
     "data pipelines",
+    "apache airflow",
     "etl pipelines",
     "airflow",
-    "etl",
-    "elt"
+    "elt",
+    "etl"
   ],
   "dbt": [
     "data build tool",
@@ -637,23 +637,23 @@
     "model deployment",
     "kubeflow",
     "mlflow",
-    "wandb",
     "mlops",
+    "wandb",
     "dvc"
   ],
   "AWS": [
     "amazon web services",
     "cloudformation",
     "cloudwatch",
-    "aws sqs",
-    "aws iam",
     "aws sns",
+    "aws iam",
+    "aws sqs",
     "lambda",
-    "ecs",
     "rds",
+    "aws",
+    "ecs",
     "eks",
     "ec2",
-    "aws",
     "s3"
   ],
   "Azure": [
@@ -686,8 +686,8 @@
   "CI/CD": [
     "continuous integration",
     "continuous deployment",
-    "ci/cd",
     "ci cd",
+    "ci/cd",
     "cicd"
   ],
   "Jenkins": [
@@ -696,8 +696,8 @@
   "GitHub Actions": [
     "github actions",
     "gitlab ci/cd",
-    "travis ci",
     "gitlab ci",
+    "travis ci",
     "circleci"
   ],
   "Git": [
@@ -717,9 +717,9 @@
   ],
   "Linux": [
     "redhat",
-    "debian",
-    "centos",
     "ubuntu",
+    "centos",
+    "debian",
     "linux",
     "unix"
   ],
@@ -733,8 +733,8 @@
     "prometheus",
     "new relic",
     "elk stack",
-    "grafana",
     "datadog",
+    "grafana",
     "splunk"
   ],
   "Mobile App Development": [
@@ -754,8 +754,8 @@
   ],
   "Data Structures & Algorithms": [
     "data structures & algorithms",
-    "problem solving",
     "data structures",
+    "problem solving",
     "algorithms",
     "leetcode",
     "dsa"
@@ -816,8 +816,8 @@
     "scrum master",
     "agile/scrum",
     "kanban",
-    "scrum",
-    "agile"
+    "agile",
+    "scrum"
   ],
   "Jira": [
     "confluence",
@@ -837,19 +837,19 @@
     "ui/ux design",
     "wireframing",
     "prototyping",
-    "ui design",
     "ux design",
+    "ui design",
     "adobe xd",
     "figma",
     "ui/ux"
   ],
   "Recruitment & HR": [
-    "employee relations",
     "talent acquisition",
+    "employee relations",
     "recruitment & hr",
     "hr operations",
-    "recruitment",
     "hr policies",
+    "recruitment",
     "onboarding",
     "screening",
     "sourcing",
@@ -869,8 +869,8 @@
     "financial analysis",
     "accounting",
     "budgeting",
-    "auditing",
     "taxation",
+    "auditing",
     "tally"
   ]
 }
