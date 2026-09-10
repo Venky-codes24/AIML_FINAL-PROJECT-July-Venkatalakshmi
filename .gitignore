@@ -5,8 +5,8 @@ data/processed/*
 !data/**/.gitkeep
 
 # models
-models/*.pkl
 models/*.joblib
+
 
 # python
 __pycache__/
