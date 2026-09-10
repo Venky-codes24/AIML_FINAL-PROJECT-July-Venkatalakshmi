@@ -47,279 +47,62 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for rich styling, card layout, and orange-accented modern UI matching mockup
+# Custom CSS for rich styling and responsive UI
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: #1E293B;
-    }
-
-    .stApp {
-        background-color: #F8FAFC;
-    }
-
-    /* Titles */
-    .title-dark {
-        font-size: 2.3rem;
-        font-weight: 800;
-        color: #0F172A;
-        letter-spacing: -0.5px;
-    }
-    .title-orange {
-        font-size: 2.3rem;
-        font-weight: 800;
-        color: #FF5722;
-        letter-spacing: -0.5px;
-    }
-    .title-underline-accent {
-        width: 48px;
-        height: 4px;
-        background: #FF5722;
-        border-radius: 2px;
-        margin-top: -2px;
-        margin-bottom: 0.8rem;
-    }
-
     .main-header {
         font-size: 2.2rem;
-        font-weight: 800;
-        color: #0F172A;
+        font-weight: 700;
+        color: #1E293B;
         margin-bottom: 0.2rem;
         letter-spacing: -0.5px;
     }
     .sub-header {
-        font-size: 0.98rem;
+        font-size: 1.05rem;
         color: #64748B;
         margin-bottom: 1.2rem;
     }
     .disclaimer-banner {
-        background-color: #FFF7ED;
-        border-left: 4px solid #FF5722;
+        background-color: #F8FAFC;
+        border-left: 4px solid #3B82F6;
         padding: 0.75rem 1rem;
-        border-radius: 6px;
+        border-radius: 4px;
         font-size: 0.88rem;
-        color: #9A3412;
+        color: #334155;
         margin-bottom: 1.2rem;
     }
-
-    /* Top Navigation Bar: Brand + Profile & Theme */
-    .top-nav-bar {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        width: 100% !important;
-        padding: 0.4rem 0 0.8rem 0;
-        margin-bottom: 0.4rem;
-    }
-    .brand-title-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .profile-header-group {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 0.75rem !important;
-        white-space: nowrap !important;
-    }
-    .theme-icon-static {
-        width: 38px;
-        height: 38px;
-        min-width: 38px;
-        border-radius: 50%;
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.15rem;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-        cursor: pointer;
-        line-height: 1;
-        user-select: none;
-    }
-    .user-avatar-circle {
-        width: 38px;
-        height: 38px;
-        min-width: 38px;
-        border-radius: 50%;
-        background: #FF5722;
-        color: #FFFFFF;
-        font-weight: 800;
-        font-size: 1.1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.35);
-        flex-shrink: 0;
-        line-height: 1;
-    }
-    .user-info-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left;
-    }
-    .user-welcome-sub {
-        font-size: 0.72rem;
-        color: #64748B;
-        font-weight: 600;
-        line-height: 1.15;
-    }
-    .user-welcome-name {
-        font-size: 0.92rem;
-        color: #0F172A;
-        font-weight: 800;
-        line-height: 1.2;
-    }
-
-    /* Feature Pill Badges */
-    .feature-pills-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-bottom: 1.4rem;
-        margin-top: 0.4rem;
-    }
-    .feature-pill-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        padding: 0.45rem 0.95rem;
-        border-radius: 10px;
-        font-size: 0.88rem;
-        font-weight: 600;
-    }
-    .pill-purple {
-        background-color: #F3E8FF;
-        color: #7E22CE;
-        border: 1px solid #E9D5FF;
-    }
-    .pill-green {
-        background-color: #DCFCE7;
-        color: #15803D;
-        border: 1px solid #BBF7D0;
-    }
-    .pill-pink {
-        background-color: #FCE7F3;
-        color: #BE185D;
-        border: 1px solid #FBCFE8;
-    }
-    .pill-orange {
-        background-color: #FFEDD5;
-        color: #C2410C;
-        border: 1px solid #FED7AA;
-    }
-
-    /* "What You'll Get" 4-Card Grid */
-    .section-headline {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: #0F172A;
-        margin: 1.6rem 0 1rem 0;
-        display: flex;
-        align-items: center;
-        gap: 0.45rem;
-    }
-    .what-you-get-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.2rem;
-    }
-    .benefit-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 14px;
-        padding: 1.15rem 1rem;
-        display: flex;
-        gap: 0.8rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-    .benefit-icon-wrapper {
-        width: 38px;
-        height: 38px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.15rem;
-        flex-shrink: 0;
-    }
-    .benefit-title {
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 0.25rem;
-    }
-    .benefit-desc {
-        font-size: 0.78rem;
-        color: #64748B;
-        line-height: 1.4;
-    }
-
-    /* Bottom Action Banner */
-    .cta-banner-card {
-        background-color: #FFF7ED;
-        border: 1px solid #FFEDD5;
-        border-radius: 14px;
-        padding: 1rem 1.4rem;
-        margin-bottom: 1.6rem;
-    }
-    .cta-left-box {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-    }
-    .cta-lightbulb {
-        font-size: 1.5rem;
-        flex-shrink: 0;
-    }
-    .cta-text-content {
-        font-size: 0.88rem;
-        color: #9A3412;
-        font-weight: 500;
-    }
-
-    /* Cards & Badges */
     .card {
         background-color: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-radius: 14px;
-        padding: 1.35rem;
+        border-radius: 10px;
+        padding: 1.25rem;
         margin-bottom: 1rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
         transition: all 0.2s ease-in-out;
     }
     .card:hover {
         border-color: #CBD5E1;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     }
     .match-badge {
         display: inline-block;
-        background: #FF5722;
+        background: #2563EB;
         color: #FFFFFF;
         font-weight: 700;
         font-size: 0.95rem;
-        padding: 0.35rem 0.85rem;
-        border-radius: 20px;
+        padding: 0.35rem 0.8rem;
+        border-radius: 16px;
         float: right;
-        box-shadow: 0 2px 6px rgba(255, 87, 34, 0.3);
     }
-
     .skill-pill {
         display: inline-block;
         background-color: #F1F5F9;
         color: #334155;
         font-size: 0.82rem;
         font-weight: 600;
-        padding: 0.22rem 0.6rem;
-        border-radius: 8px;
+        padding: 0.2rem 0.55rem;
+        border-radius: 6px;
         margin: 0.2rem 0.25rem 0.2rem 0;
         border: 1px solid #E2E8F0;
     }
@@ -329,9 +112,9 @@ st.markdown(
         border: 1px solid #A7F3D0;
     }
     .skill-pill-missing {
-        background-color: #FFF7ED;
-        color: #C2410C;
-        border: 1px solid #FFD8A8;
+        background-color: #FFFBEB;
+        color: #92400E;
+        border: 1px solid #FDE68A;
     }
     .meta-tag {
         font-size: 0.85rem;
@@ -341,7 +124,7 @@ st.markdown(
     }
     .section-title {
         font-size: 1.25rem;
-        font-weight: 800;
+        font-weight: 700;
         color: #0F172A;
         margin-top: 1.6rem;
         margin-bottom: 0.8rem;
@@ -350,31 +133,28 @@ st.markdown(
     }
     .stat-box {
         text-align: center;
-        padding: 1.1rem 0.9rem;
-        background-color: #FFFFFF;
-        border-radius: 14px;
+        padding: 0.9rem;
+        background-color: #F8FAFC;
+        border-radius: 8px;
         border: 1px solid #E2E8F0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
     .stat-number {
-        font-size: 1.55rem;
-        font-weight: 800;
-        color: #FF5722;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2563EB;
     }
     .stat-label {
         font-size: 0.82rem;
         color: #64748B;
-        font-weight: 600;
-        margin-top: 0.2rem;
+        font-weight: 500;
     }
     .roadmap-step {
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-left: 5px solid #FF5722;
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        margin-bottom: 0.85rem;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        border-left: 5px solid #2563EB;
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        margin-bottom: 0.8rem;
     }
     .ats-badge {
         display: inline-block;
@@ -382,48 +162,6 @@ st.markdown(
         border-radius: 12px;
         font-weight: 700;
         font-size: 0.85rem;
-    }
-
-    /* Buttons: Modern Orange */
-    div.stButton > button {
-        background-color: #FF5722 !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        border-radius: 10px !important;
-        border: none !important;
-        padding: 0.55rem 1.25rem !important;
-        transition: all 0.2s ease !important;
-        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
-    }
-    div.stButton > button:hover {
-        background-color: #F4511E !important;
-        color: #FFFFFF !important;
-        box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4) !important;
-        transform: translateY(-1px) !important;
-    }
-
-    div[data-testid="stDownloadButton"] > button {
-        background-color: #FF5722 !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        border-radius: 10px !important;
-        border: none !important;
-        padding: 0.6rem 1.4rem !important;
-        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
-    }
-
-    /* Sidebar Custom Styling */
-    [data-testid="stSidebar"] {
-        background-color: #FFFFFF;
-        border-right: 1px solid #E2E8F0;
-    }
-    .sidebar-bottom-card {
-        background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-        border: 1px solid #FED7AA;
-        border-radius: 16px;
-        padding: 1.2rem 1rem;
-        text-align: center;
-        margin-top: 2rem;
     }
     </style>
     """,
@@ -528,9 +266,9 @@ def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
             r=values_closed,
             theta=categories_closed,
             fill="toself",
-            fillcolor="rgba(255, 87, 34, 0.22)",
-            line=dict(color="#FF5722", width=2.5),
-            marker=dict(size=7, color="#E64A19"),
+            fillcolor="rgba(37, 99, 235, 0.25)",
+            line=dict(color="#2563EB", width=2.5),
+            marker=dict(size=7, color="#1D4ED8"),
             name="Your Skills",
         )
     )
@@ -544,7 +282,7 @@ def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
                 gridcolor="#E2E8F0",
             ),
             angularaxis=dict(
-                tickfont=dict(size=11, color="#1E293B", family="Plus Jakarta Sans"),
+                tickfont=dict(size=11, color="#1E293B", family="sans-serif"),
                 gridcolor="#E2E8F0",
             ),
         ),
@@ -578,8 +316,8 @@ def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figu
             orientation="h",
             marker=dict(
                 color=counts,
-                colorscale=[[0, "#FED7AA"], [1, "#FF5722"]],
-                line=dict(color="#EA580C", width=1),
+                colorscale="Blues",
+                line=dict(color="#1D4ED8", width=1),
             ),
             text=[f"{c} jobs" for c in counts],
             textposition="auto",
@@ -587,7 +325,7 @@ def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figu
     )
 
     fig.update_layout(
-        title=dict(text="Top Skills Demanded Across Recommended Jobs", font=dict(size=13, color="#1E293B", family="Plus Jakarta Sans")),
+        title=dict(text="Top Skills Demanded Across Recommended Jobs", font=dict(size=13, color="#1E293B")),
         xaxis=dict(title="Occurrence Count in Matches", tickfont=dict(size=10), gridcolor="#F1F5F9"),
         yaxis=dict(tickfont=dict(size=11, color="#1E293B")),
         margin=dict(l=20, r=20, t=40, b=30),
@@ -650,18 +388,6 @@ def main():
         """
     )
 
-    # Sidebar Bottom Brand Card (from Mockup)
-    st.sidebar.markdown(
-        """
-        <div class="sidebar-bottom-card">
-            <div style="font-size: 2.2rem; margin-bottom: 0.35rem;">🚀</div>
-            <div style="font-weight: 800; font-size: 0.95rem; color: #9A3412; margin-bottom: 0.2rem;">AI Career Copilot</div>
-            <div style="font-size: 0.78rem; color: #C2410C; line-height: 1.35;">Instant ATS feedback, tailored job matches, & skill gap analysis.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
     # Check if models exist
     if not status["classifier"] or not status["recommender"]:
         st.error(
@@ -682,51 +408,8 @@ def main():
     # VIEW 1: CANDIDATE CAREER HUB
     # =========================================================================
     if app_mode == "👤 Candidate Career Hub":
-        # Top Header Bar: SmartHire Career Hub (Left) + Profile & Theme (Right)
-        st.markdown(
-            """
-            <div class="top-nav-bar">
-                <div class="brand-title-group">
-                    <div style="display: flex; align-items: baseline; gap: 0.5rem;">
-                        <span class="title-dark">SmartHire</span>
-                        <span class="title-orange">Career Hub</span>
-                    </div>
-                    <div class="title-underline-accent"></div>
-                </div>
-                <div class="profile-header-group">
-                    <div class="theme-icon-static" title="Toggle Theme">🌙</div>
-                    <div class="user-avatar-circle">V</div>
-                    <div class="user-info-text">
-                        <span class="user-welcome-sub">Welcome</span>
-                        <span class="user-welcome-name">Venky <span style="font-size:0.7rem; color:#94A3B8;">▾</span></span>
-                    </div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-        # Feature Pill Badges Row (Matching Mockup)
-        st.markdown(
-            """
-            <div class="feature-pills-container">
-                <div class="feature-pill-badge pill-purple">
-                    <span>📄</span> <span>Resume Analysis</span>
-                </div>
-                <div class="feature-pill-badge pill-green">
-                    <span>🛡️</span> <span>ATS Optimization</span>
-                </div>
-                <div class="feature-pill-badge pill-pink">
-                    <span>🎯</span> <span>Job Matching</span>
-                </div>
-                <div class="feature-pill-badge pill-orange">
-                    <span>📊</span> <span>Career Insights</span>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
+        # Main Header
+        st.markdown('<div class="main-header">SmartHire Career Hub</div>', unsafe_allow_html=True)
         st.markdown(
             '<div class="sub-header">AI-powered resume role categorization, ATS optimization, interactive job matching, and career roadmaps.</div>',
             unsafe_allow_html=True,
@@ -789,59 +472,7 @@ def main():
                 st.info(f"ℹ️ Loaded {source_label} for demonstration.")
 
         if not resume_raw_text.strip():
-            # What You'll Get Cards (from Mockup)
-            st.markdown('<div class="section-headline">✨ What You\'ll Get with SmartHire</div>', unsafe_allow_html=True)
-            st.markdown(
-                """
-                <div class="what-you-get-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon-wrapper" style="background:#F3E8FF; color:#7E22CE;">🎯</div>
-                        <div>
-                            <div class="benefit-title">Role Prediction</div>
-                            <div class="benefit-desc">Supervised ML classifier trained on thousands of tech resumes with confidence scoring.</div>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon-wrapper" style="background:#DCFCE7; color:#15803D;">🛡️</div>
-                        <div>
-                            <div class="benefit-title">ATS Optimizer</div>
-                            <div class="benefit-desc">Comprehensive 100-point audit across contact info, section structure, and action verbs.</div>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon-wrapper" style="background:#FCE7F3; color:#BE185D;">💼</div>
-                        <div>
-                            <div class="benefit-title">Job Matching</div>
-                            <div class="benefit-desc">Cosine similarity ranking across live job corpus with skill overlap breakdown.</div>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon-wrapper" style="background:#FFEDD5; color:#C2410C;">📈</div>
-                        <div>
-                            <div class="benefit-title">Career Roadmap</div>
-                            <div class="benefit-desc">Personalized phased learning steps to close critical skill gaps and boost interview calls.</div>
-                        </div>
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            # CTA Banner (from Mockup)
-            st.markdown(
-                """
-                <div class="cta-banner-card">
-                    <div class="cta-left-box">
-                        <span class="cta-lightbulb">💡</span>
-                        <div class="cta-text-content">
-                            <strong>Ready to accelerate your career?</strong> Upload your resume above or choose a demo profile to experience our end-to-end ML career engine.
-                        </div>
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            st.info("👆 Please upload a resume file in the 'Upload Your Resume' tab, paste text, or select a demo sample to begin analysis.")
+            st.info("👆 Please upload a resume file in the 'Upload Your Resume' tab or select a demo sample to begin analysis.")
             return
 
         # Step 2: Resume Analysis & Classification
