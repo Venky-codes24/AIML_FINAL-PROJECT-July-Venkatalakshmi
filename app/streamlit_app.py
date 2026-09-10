@@ -57,10 +57,36 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
+    /* Theme color adaptation: Light Blue (#38BDF8 / #60A5FA) on dark mode, navy on light mode */
+    :root {
+        --text-primary: #0F172A;
+        --text-secondary: #475569;
+        --card-bg: #FFFFFF;
+        --card-border: #E2E8F0;
+        --header-accent: #38BDF8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --text-primary: #38BDF8;
+            --text-secondary: #94A3B8;
+            --card-bg: #1E293B;
+            --card-border: #334155;
+            --header-accent: #38BDF8;
+        }
+    }
+
+    /* Streamlit dark mode detection support */
+    [data-theme="dark"] .main-header,
+    [data-testid="stAppViewContainer"][data-theme="dark"] .main-header,
+    .stApp[data-theme="dark"] .main-header {
+        color: #38BDF8 !important;
+    }
+
     .main-header {
         font-size: 2.3rem;
         font-weight: 800;
-        color: #0F172A;
+        color: #38BDF8; /* Light blue by default so it's always clearly visible on dark mode */
         margin-bottom: 0.2rem;
         letter-spacing: -0.5px;
     }
@@ -69,7 +95,7 @@ st.markdown(
     }
     .sub-header {
         font-size: 1rem;
-        color: #64748B;
+        color: #94A3B8;
         margin-bottom: 1.2rem;
     }
     .disclaimer-banner {
@@ -93,6 +119,9 @@ st.markdown(
     .card:hover {
         border-color: #FED7AA;
         box-shadow: 0 6px 16px rgba(255, 87, 34, 0.08);
+    }
+    .card h4 {
+        color: #38BDF8 !important; /* Light blue candidate and job titles */
     }
     .match-badge {
         display: inline-block;
@@ -135,10 +164,10 @@ st.markdown(
     .section-title {
         font-size: 1.25rem;
         font-weight: 800;
-        color: #0F172A;
+        color: #38BDF8 !important; /* Light blue section titles */
         margin-top: 1.6rem;
         margin-bottom: 0.8rem;
-        border-bottom: 2px solid #FFEDD5;
+        border-bottom: 2px solid #38BDF8;
         padding-bottom: 0.4rem;
     }
     .stat-box {
