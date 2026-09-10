@@ -51,58 +51,68 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    html, body, [class*="css"], .stMarkdown {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
     .main-header {
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: #1E293B;
+        font-size: 2.3rem;
+        font-weight: 800;
+        color: #0F172A;
         margin-bottom: 0.2rem;
         letter-spacing: -0.5px;
     }
+    .main-header span {
+        color: #FF5722;
+    }
     .sub-header {
-        font-size: 1.05rem;
+        font-size: 1rem;
         color: #64748B;
         margin-bottom: 1.2rem;
     }
     .disclaimer-banner {
-        background-color: #F8FAFC;
-        border-left: 4px solid #3B82F6;
+        background-color: #FFF7ED;
+        border-left: 4px solid #FF5722;
         padding: 0.75rem 1rem;
-        border-radius: 4px;
+        border-radius: 8px;
         font-size: 0.88rem;
-        color: #334155;
+        color: #9A3412;
         margin-bottom: 1.2rem;
     }
     .card {
         background-color: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 1.25rem;
+        border-radius: 14px;
+        padding: 1.35rem;
         margin-bottom: 1rem;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
         transition: all 0.2s ease-in-out;
     }
     .card:hover {
-        border-color: #CBD5E1;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+        border-color: #FED7AA;
+        box-shadow: 0 6px 16px rgba(255, 87, 34, 0.08);
     }
     .match-badge {
         display: inline-block;
-        background: #2563EB;
+        background: #FF5722;
         color: #FFFFFF;
         font-weight: 700;
         font-size: 0.95rem;
-        padding: 0.35rem 0.8rem;
-        border-radius: 16px;
+        padding: 0.35rem 0.85rem;
+        border-radius: 20px;
         float: right;
+        box-shadow: 0 2px 6px rgba(255, 87, 34, 0.25);
     }
     .skill-pill {
         display: inline-block;
-        background-color: #F1F5F9;
+        background-color: #F8FAFC;
         color: #334155;
         font-size: 0.82rem;
         font-weight: 600;
-        padding: 0.2rem 0.55rem;
-        border-radius: 6px;
+        padding: 0.22rem 0.6rem;
+        border-radius: 8px;
         margin: 0.2rem 0.25rem 0.2rem 0;
         border: 1px solid #E2E8F0;
     }
@@ -112,9 +122,9 @@ st.markdown(
         border: 1px solid #A7F3D0;
     }
     .skill-pill-missing {
-        background-color: #FFFBEB;
-        color: #92400E;
-        border: 1px solid #FDE68A;
+        background-color: #FFF7ED;
+        color: #C2410C;
+        border: 1px solid #FFD8A8;
     }
     .meta-tag {
         font-size: 0.85rem;
@@ -124,37 +134,39 @@ st.markdown(
     }
     .section-title {
         font-size: 1.25rem;
-        font-weight: 700;
+        font-weight: 800;
         color: #0F172A;
         margin-top: 1.6rem;
         margin-bottom: 0.8rem;
-        border-bottom: 2px solid #F1F5F9;
+        border-bottom: 2px solid #FFEDD5;
         padding-bottom: 0.4rem;
     }
     .stat-box {
         text-align: center;
-        padding: 0.9rem;
-        background-color: #F8FAFC;
-        border-radius: 8px;
+        padding: 1.1rem 0.9rem;
+        background-color: #FFFFFF;
+        border-radius: 12px;
         border: 1px solid #E2E8F0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
     .stat-number {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #2563EB;
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: #FF5722;
     }
     .stat-label {
         font-size: 0.82rem;
         color: #64748B;
-        font-weight: 500;
+        font-weight: 600;
     }
     .roadmap-step {
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-left: 5px solid #2563EB;
-        border-radius: 8px;
-        padding: 1rem 1.2rem;
-        margin-bottom: 0.8rem;
+        border-left: 5px solid #FF5722;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.85rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
     .ats-badge {
         display: inline-block;
@@ -162,6 +174,41 @@ st.markdown(
         border-radius: 12px;
         font-weight: 700;
         font-size: 0.85rem;
+    }
+
+    /* Buttons: Modern Orange matching image */
+    div.stButton > button {
+        background-color: #FF5722 !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        border-radius: 10px !important;
+        border: none !important;
+        padding: 0.55rem 1.25rem !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
+    }
+    div.stButton > button:hover {
+        background-color: #F4511E !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    div[data-testid="stDownloadButton"] > button {
+        background-color: #FF5722 !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        border-radius: 10px !important;
+        border: none !important;
+        padding: 0.6rem 1.4rem !important;
+        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
+    }
+
+    /* Tabs styling */
+    div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+        color: #FF5722 !important;
+        border-bottom-color: #FF5722 !important;
+        font-weight: 700 !important;
     }
     </style>
     """,
@@ -266,9 +313,9 @@ def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
             r=values_closed,
             theta=categories_closed,
             fill="toself",
-            fillcolor="rgba(37, 99, 235, 0.25)",
-            line=dict(color="#2563EB", width=2.5),
-            marker=dict(size=7, color="#1D4ED8"),
+            fillcolor="rgba(255, 87, 34, 0.22)",
+            line=dict(color="#FF5722", width=2.5),
+            marker=dict(size=7, color="#E64A19"),
             name="Your Skills",
         )
     )
@@ -282,7 +329,7 @@ def render_radar_chart(domain_dist: Dict[str, int]) -> go.Figure:
                 gridcolor="#E2E8F0",
             ),
             angularaxis=dict(
-                tickfont=dict(size=11, color="#1E293B", family="sans-serif"),
+                tickfont=dict(size=11, color="#1E293B", family="Plus Jakarta Sans"),
                 gridcolor="#E2E8F0",
             ),
         ),
@@ -316,8 +363,8 @@ def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figu
             orientation="h",
             marker=dict(
                 color=counts,
-                colorscale="Blues",
-                line=dict(color="#1D4ED8", width=1),
+                colorscale=[[0, "#FED7AA"], [1, "#FF5722"]],
+                line=dict(color="#EA580C", width=1),
             ),
             text=[f"{c} jobs" for c in counts],
             textposition="auto",
@@ -325,7 +372,7 @@ def render_market_demand_chart(recommendations: List[Dict[str, Any]]) -> go.Figu
     )
 
     fig.update_layout(
-        title=dict(text="Top Skills Demanded Across Recommended Jobs", font=dict(size=13, color="#1E293B")),
+        title=dict(text="Top Skills Demanded Across Recommended Jobs", font=dict(size=13, color="#1E293B", family="Plus Jakarta Sans")),
         xaxis=dict(title="Occurrence Count in Matches", tickfont=dict(size=10), gridcolor="#F1F5F9"),
         yaxis=dict(tickfont=dict(size=11, color="#1E293B")),
         margin=dict(l=20, r=20, t=40, b=30),
@@ -409,7 +456,7 @@ def main():
     # =========================================================================
     if app_mode == "👤 Candidate Career Hub":
         # Main Header
-        st.markdown('<div class="main-header">SmartHire Career Hub</div>', unsafe_allow_html=True)
+        st.markdown('<div class="main-header">SmartHire <span>Career Hub</span></div>', unsafe_allow_html=True)
         st.markdown(
             '<div class="sub-header">AI-powered resume role categorization, ATS optimization, interactive job matching, and career roadmaps.</div>',
             unsafe_allow_html=True,
