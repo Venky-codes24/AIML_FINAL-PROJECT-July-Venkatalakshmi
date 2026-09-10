@@ -49,7 +49,7 @@ st.set_page_config(
 
 
 def render_custom_styles(is_dark: bool = False):
-    """Render dynamic CSS tokens supporting smooth Light & Dark Mode transitions."""
+    """Render dynamic CSS tokens supporting smooth Light & Dark Mode transitions and polished buttons."""
     bg_app = "#0B0F19" if is_dark else "#F8FAFC"
     bg_sidebar = "#111827" if is_dark else "#FFFFFF"
     bg_card = "#1E293B" if is_dark else "#FFFFFF"
@@ -59,7 +59,7 @@ def render_custom_styles(is_dark: bool = False):
     text_body = "#CBD5E1" if is_dark else "#334155"
     upload_bg = "#151F32" if is_dark else "#F8FAFC"
     upload_border = "#475569" if is_dark else "#CBD5E1"
-    banner_bg = "#2A1810" if is_dark else "#FFF7ED"
+    banner_bg = "#23150D" if is_dark else "#FFF7ED"
     banner_border = "#7C2D12" if is_dark else "#FFEDD5"
     banner_text = "#FDBA74" if is_dark else "#9A3412"
     theme_btn_bg = "#334155" if is_dark else "#FFFFFF"
@@ -78,6 +78,8 @@ def render_custom_styles(is_dark: bool = False):
             --text-primary: {text_primary};
             --text-secondary: {text_secondary};
             --text-body: {text_body};
+            --upload-bg: {upload_bg};
+            --upload-border: {upload_border};
         }}
 
         html, body, [class*="css"] {{
@@ -118,13 +120,12 @@ def render_custom_styles(is_dark: bool = False):
             margin-top: -2px;
         }}
 
-        /* User Profile in Header */
-        .user-profile-header {{
+        /* Header Right Cluster (Theme Button + Profile Avatar Compact Spacing) */
+        .user-profile-header-compact {{
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            justify-content: flex-end;
-            margin-top: 6px;
+            gap: 0.65rem;
+            margin-top: 3px;
         }}
 
         .user-avatar-circle {{
@@ -139,6 +140,7 @@ def render_custom_styles(is_dark: bool = False):
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 8px rgba(255, 87, 34, 0.35);
+            flex-shrink: 0;
         }}
 
         .user-welcome-sub {{
@@ -158,21 +160,21 @@ def render_custom_styles(is_dark: bool = False):
         /* Theme Toggle Round Button */
         div.st-key-theme_toggle_btn > button,
         div[data-testid="stButton"].st-key-theme_toggle_btn button {{
-            width: 42px !important;
-            height: 42px !important;
-            min-width: 42px !important;
-            max-width: 42px !important;
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            max-width: 40px !important;
             border-radius: 50% !important;
             background-color: {theme_btn_bg} !important;
             border: 1px solid {theme_btn_border} !important;
             color: {theme_btn_color} !important;
             font-size: 1.2rem !important;
             padding: 0 !important;
-            margin: 4px 0 0 0 !important;
+            margin: 3px 0 0 0 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08) !important;
             cursor: pointer !important;
             transition: all 0.2s ease !important;
         }}
@@ -231,7 +233,7 @@ def render_custom_styles(is_dark: bool = False):
             background-color: {bg_card};
             border: 1px solid {border_card};
             border-radius: 16px;
-            padding: 1.4rem;
+            padding: 1.35rem;
             margin-bottom: 1.2rem;
             box-shadow: 0 4px 20px -2px rgba(0, 0, 0, {'0.25' if is_dark else '0.03'});
             transition: all 0.2s ease-in-out;
@@ -258,6 +260,7 @@ def render_custom_styles(is_dark: bool = False):
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
+            flex-shrink: 0;
         }}
         .icon-box-blue {{
             width: 42px;
@@ -269,6 +272,7 @@ def render_custom_styles(is_dark: bool = False):
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
+            flex-shrink: 0;
         }}
         .icon-box-green {{
             width: 42px;
@@ -280,6 +284,7 @@ def render_custom_styles(is_dark: bool = False):
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
+            flex-shrink: 0;
         }}
 
         .card-title-text {{
@@ -292,6 +297,37 @@ def render_custom_styles(is_dark: bool = False):
             font-size: 0.84rem;
             color: {text_secondary};
             margin: 0;
+        }}
+
+        /* Dashed Upload Visual Box */
+        .dashed-upload-visual {{
+            border: 2px dashed {upload_border};
+            border-radius: 12px;
+            background: {upload_bg};
+            padding: 1.5rem 1rem;
+            text-align: center;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            transition: border-color 0.2s;
+        }}
+        .dashed-upload-visual:hover {{
+            border-color: #FF5722;
+        }}
+
+        .upload-cloud-icon {{
+            font-size: 2rem;
+            color: #FF5722;
+            margin-bottom: 0.35rem;
+        }}
+        .upload-main-text {{
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: {text_primary};
+            margin-bottom: 0.15rem;
+        }}
+        .upload-sub-text {{
+            font-size: 0.82rem;
+            color: {text_secondary};
         }}
 
         /* "What You'll Get" Grid */
@@ -351,10 +387,7 @@ def render_custom_styles(is_dark: bool = False):
             background-color: {banner_bg};
             border: 1px solid {banner_border};
             border-radius: 14px;
-            padding: 1.1rem 1.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 1rem 1.4rem;
             margin-bottom: 2rem;
         }}
 
@@ -366,6 +399,7 @@ def render_custom_styles(is_dark: bool = False):
 
         .cta-lightbulb {{
             font-size: 1.6rem;
+            flex-shrink: 0;
         }}
 
         .cta-text-content {{
@@ -374,22 +408,51 @@ def render_custom_styles(is_dark: bool = False):
             font-weight: 500;
         }}
 
-        /* Buttons */
+        /* All Standard Buttons: Modern Orange Styling */
         div.stButton > button:not([key="theme_toggle_btn"]) {{
-            background-color: #FF5722;
-            color: #FFFFFF;
-            font-weight: 700;
-            border-radius: 10px;
-            border: none;
-            padding: 0.55rem 1.25rem;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25);
+            background-color: #FF5722 !important;
+            color: #FFFFFF !important;
+            font-weight: 700 !important;
+            border-radius: 10px !important;
+            border: none !important;
+            padding: 0.55rem 1.25rem !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
         }}
         div.stButton > button:not([key="theme_toggle_btn"]):hover {{
-            background-color: #F4511E;
-            color: #FFFFFF;
-            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.35);
-            transform: translateY(-1px);
+            background-color: #F4511E !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4) !important;
+            transform: translateY(-1px) !important;
+        }}
+
+        /* File Uploader browse button */
+        [data-testid="stFileUploader"] section button {{
+            background-color: #FF5722 !important;
+            color: #FFFFFF !important;
+            font-weight: 700 !important;
+            border-radius: 10px !important;
+            border: none !important;
+            padding: 0.45rem 1.1rem !important;
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
+        }}
+        [data-testid="stFileUploader"] section button:hover {{
+            background-color: #F4511E !important;
+        }}
+
+        /* Download Button */
+        div[data-testid="stDownloadButton"] > button {{
+            background-color: #FF5722 !important;
+            color: #FFFFFF !important;
+            font-weight: 700 !important;
+            border-radius: 10px !important;
+            border: none !important;
+            padding: 0.6rem 1.4rem !important;
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25) !important;
+        }}
+        div[data-testid="stDownloadButton"] > button:hover {{
+            background-color: #F4511E !important;
+            transform: translateY(-1px) !important;
         }}
 
         /* Skill Pill */
@@ -959,11 +1022,11 @@ def main():
         return
 
     # =========================================================================
-    # MAIN CANDIDATE CAREER HUB HEADER (Matching Mockup with Interactive Theme Toggle)
+    # MAIN CANDIDATE CAREER HUB HEADER (Tightly Grouped Theme & Profile Buttons)
     # =========================================================================
-    head_col_title, head_col_theme, head_col_user = st.columns([72, 6, 22])
+    head_col_left, head_col_right = st.columns([68, 32])
 
-    with head_col_title:
+    with head_col_left:
         st.markdown(
             """
             <div>
@@ -977,27 +1040,29 @@ def main():
             unsafe_allow_html=True,
         )
 
-    with head_col_theme:
-        # Interactive Theme Toggle Button (🌙 -> ☀️)
-        theme_icon = "☀️" if is_dark else "🌙"
-        theme_tooltip = "Switch to Light Mode" if is_dark else "Switch to Dark Mode"
-        if st.button(theme_icon, key="theme_toggle_btn", help=theme_tooltip):
-            st.session_state["dark_mode"] = not is_dark
-            st.rerun()
+    with head_col_right:
+        # Sub-columns to place theme button immediately beside the profile avatar
+        r_theme_col, r_user_col = st.columns([1.15, 3.2])
+        with r_theme_col:
+            theme_icon = "☀️" if is_dark else "🌙"
+            theme_tooltip = "Switch to Light Mode" if is_dark else "Switch to Dark Mode"
+            if st.button(theme_icon, key="theme_toggle_btn", help=theme_tooltip):
+                st.session_state["dark_mode"] = not is_dark
+                st.rerun()
 
-    with head_col_user:
-        st.markdown(
-            f"""
-            <div class="user-profile-header">
-                <div class="user-avatar-circle">V</div>
-                <div style="display: flex; flex-direction: column;">
-                    <span class="user-welcome-sub">Welcome</span>
-                    <span class="user-welcome-name">Venky <span style="font-size:0.75rem; color:#64748B;">▾</span></span>
+        with r_user_col:
+            st.markdown(
+                f"""
+                <div class="user-profile-header-compact">
+                    <div class="user-avatar-circle">V</div>
+                    <div style="display: flex; flex-direction: column;">
+                        <span class="user-welcome-sub">Welcome</span>
+                        <span class="user-welcome-name">Venky <span style="font-size:0.75rem; color:#64748B;">▾</span></span>
+                    </div>
                 </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+                """,
+                unsafe_allow_html=True,
+            )
 
     # Feature Pill Badges Row (Matching Mockup)
     st.markdown(
@@ -1036,6 +1101,11 @@ def main():
                         <div class="card-subtitle-text">Supports PDF, DOCX, or TXT files (Max 5MB)</div>
                     </div>
                 </div>
+                <div class="dashed-upload-visual">
+                    <div class="upload-cloud-icon">☁️ ⬆️</div>
+                    <div class="upload-main-text">Drag & drop your resume here</div>
+                    <div class="upload-sub-text">or click to browse files below</div>
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1063,7 +1133,7 @@ def main():
         # Card 1: Try a Sample Resume
         st.markdown(
             """
-            <div class="custom-card" style="margin-bottom: 1rem; padding: 1.1rem 1.2rem;">
+            <div class="custom-card" style="margin-bottom: 1rem; padding: 1.15rem 1.25rem;">
                 <div class="card-header-icon" style="margin-bottom: 0.5rem;">
                     <div class="icon-box-blue">📄</div>
                     <div>
@@ -1091,7 +1161,7 @@ def main():
         # Card 2: Paste Resume Text
         st.markdown(
             """
-            <div class="custom-card" style="margin-top: 1rem; margin-bottom: 0.6rem; padding: 1.1rem 1.2rem;">
+            <div class="custom-card" style="margin-top: 1rem; margin-bottom: 0.6rem; padding: 1.15rem 1.25rem;">
                 <div class="card-header-icon" style="margin-bottom: 0.4rem;">
                     <div class="icon-box-green">✏️</div>
                     <div>
@@ -1159,20 +1229,29 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # Bottom Action / Tip Banner Card (Matching Mockup)
-    st.markdown(
-        """
-        <div class="cta-banner-card">
+    # Bottom Action / Tip Banner Card with Interactive Get Started Button
+    st.markdown('<div class="cta-banner-card">', unsafe_allow_html=True)
+    cta_left, cta_right = st.columns([78, 22])
+    with cta_left:
+        st.markdown(
+            """
             <div class="cta-left-box">
                 <span class="cta-lightbulb">💡</span>
                 <span class="cta-text-content">
                     Ready to accelerate your career? Upload your resume or try a sample above to get AI-powered role matches, ATS scoring, and learning roadmaps.
                 </span>
             </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            """,
+            unsafe_allow_html=True,
+        )
+    with cta_right:
+        if st.button("Get Started →", key="cta_get_started_btn", use_container_width=True):
+            if not st.session_state.get("active_resume_text"):
+                sample_k = "Demo Sample 1: Full-Stack & Python / C Candidate"
+                st.session_state["active_resume_text"] = DEMO_SAMPLE_RESUMES[sample_k]
+                st.session_state["active_source_label"] = "Demo Sample: Full-Stack & Python / C Candidate"
+                st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # =========================================================================
     # RESUME PROCESSING & ANALYSIS
@@ -1181,7 +1260,7 @@ def main():
     source_label = st.session_state.get("active_source_label", "No document active")
 
     if not resume_raw_text:
-        st.info("👆 Upload your resume file or click **'Use Sample Resume'** above to view full AI career analysis.")
+        st.info("👆 Upload your resume file or click **'Use Sample Resume'** or **'Get Started →'** above to view full AI career analysis.")
         return
 
     # Execute ML Pipelines
