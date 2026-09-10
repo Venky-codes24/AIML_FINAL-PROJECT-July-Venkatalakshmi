@@ -106,17 +106,31 @@ st.markdown(
         margin-bottom: 1.2rem;
     }
 
-    /* User Profile in Header */
-    .user-profile-header-compact {
+    /* Top Navigation Bar: Brand + Profile & Theme */
+    .top-nav-bar {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 0.4rem 0 0.8rem 0;
+        margin-bottom: 0.4rem;
+    }
+    .brand-title-group {
         display: flex;
-        align-items: center;
-        gap: 0.65rem;
-        justify-content: flex-end;
-        margin-top: 4px;
+        flex-direction: column;
+    }
+    .profile-header-group {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        white-space: nowrap !important;
     }
     .theme-icon-static {
         width: 38px;
         height: 38px;
+        min-width: 38px;
         border-radius: 50%;
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
@@ -124,33 +138,43 @@ st.markdown(
         align-items: center;
         justify-content: center;
         font-size: 1.15rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         cursor: pointer;
+        line-height: 1;
+        user-select: none;
     }
     .user-avatar-circle {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
         border-radius: 50%;
         background: #FF5722;
         color: #FFFFFF;
-        font-weight: 700;
-        font-size: 1.15rem;
+        font-weight: 800;
+        font-size: 1.1rem;
         display: flex;
         align-items: center;
         justify-content: center;
         box-shadow: 0 2px 8px rgba(255, 87, 34, 0.35);
         flex-shrink: 0;
+        line-height: 1;
+    }
+    .user-info-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
     }
     .user-welcome-sub {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         color: #64748B;
-        font-weight: 500;
-        line-height: 1.1;
+        font-weight: 600;
+        line-height: 1.15;
     }
     .user-welcome-name {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         color: #0F172A;
-        font-weight: 700;
+        font-weight: 800;
         line-height: 1.2;
     }
 
@@ -658,35 +682,29 @@ def main():
     # VIEW 1: CANDIDATE CAREER HUB
     # =========================================================================
     if app_mode == "👤 Candidate Career Hub":
-        # Main Header matching Mockup
-        head_col_left, head_col_right = st.columns([68, 32])
-        with head_col_left:
-            st.markdown(
-                """
-                <div>
+        # Top Header Bar: SmartHire Career Hub (Left) + Profile & Theme (Right)
+        st.markdown(
+            """
+            <div class="top-nav-bar">
+                <div class="brand-title-group">
                     <div style="display: flex; align-items: baseline; gap: 0.5rem;">
                         <span class="title-dark">SmartHire</span>
                         <span class="title-orange">Career Hub</span>
                     </div>
                     <div class="title-underline-accent"></div>
                 </div>
-                """,
-                unsafe_allow_html=True,
-            )
-        with head_col_right:
-            st.markdown(
-                """
-                <div class="user-profile-header-compact">
-                    <div class="theme-icon-static" title="Theme Mode">🌙</div>
+                <div class="profile-header-group">
+                    <div class="theme-icon-static" title="Toggle Theme">🌙</div>
                     <div class="user-avatar-circle">V</div>
-                    <div style="display: flex; flex-direction: column;">
+                    <div class="user-info-text">
                         <span class="user-welcome-sub">Welcome</span>
-                        <span class="user-welcome-name">Venky <span style="font-size:0.75rem; color:#64748B;">▾</span></span>
+                        <span class="user-welcome-name">Venky <span style="font-size:0.7rem; color:#94A3B8;">▾</span></span>
                     </div>
                 </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
         # Feature Pill Badges Row (Matching Mockup)
         st.markdown(
