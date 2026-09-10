@@ -1330,13 +1330,13 @@ def main():
 
         report_content = generate_assessment_report_markdown(
             filename=source_label,
-            predicted_cat=predicted_cat,
-            confidence_pct=confidence_pct,
+            predicted_role=predicted_cat,
+            confidence=confidence_pct,
             skills_found=skills_found,
             ats_data=ats_data,
             recommendations=recommendations,
             skills_to_learn=skills_to_learn,
-            metadata=metadata,
+            roadmap=roadmap,
         )
         st.download_button(
             label="📥 Download Full ATS Audit Report (.md)",
